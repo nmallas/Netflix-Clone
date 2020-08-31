@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Login from './components/Login';
 function App() {
   const [loading, setLoading] = useState(true);
 
@@ -8,6 +9,7 @@ function App() {
       const res = await fetch("/api/session");
       if (res.ok) {
         res.data = await res.json();
+      } else {
       }
       setLoading(false);
     }
@@ -18,9 +20,12 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Route path="/">
-        <h1>My Home Page</h1>
-      </Route>
+      <Switch>
+        <Route exact path="/">
+          <h1>My Home Page</h1>
+        </Route>
+        <Route path="/login" component={Login}/>
+      </Switch>
     </BrowserRouter>
   );
 }
