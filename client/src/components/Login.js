@@ -1,4 +1,5 @@
 import React from "react";
+import {login} from "../store/authReducer";
 
 class Login extends React.Component{
     constructor(props) {
@@ -15,16 +16,7 @@ class Login extends React.Component{
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(e)
-        // try {
-        //     let user = await fetch("/api/session", {
-        //         method: "Put",
-        //         headers: {
-        //             "Content-Type": "application/json"
-        //         },
-        //         body: { }
-        //     })
-        // }
+        login(this.state);
     }
 
     render() {
