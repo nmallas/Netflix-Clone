@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './components/Login';
+import { useSelector } from "react-redux";
 
 
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const userId = useSelector(state => state.authentication.id)
+  console.log(userId);
 
   useEffect(() => {
     const loadUser = async () => {

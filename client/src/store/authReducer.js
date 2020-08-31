@@ -28,11 +28,10 @@ export function login({email, password}) {
             },
             body: JSON.stringify({email, password})
         })
-        console.log(res);
         if(res.ok) {
-            let user = await res.json();
-            console.log(user);
-            dispatch(setUser(user.id));
+            let currentUser = await res.json();
+            console.log(currentUser.user.id);
+            dispatch(setUser(currentUser.user.id));
             return res;
         } else {
             return;
