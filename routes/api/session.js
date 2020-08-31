@@ -10,7 +10,7 @@ const { jwtConfig: { expiresIn }} = require('../../config');
 const router = express.Router();
 
 const validateLogin = [
-  check("username").exists(),
+  check("email").exists(),
   check("password").exists(),
 ];
 
