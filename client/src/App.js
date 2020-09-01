@@ -25,7 +25,6 @@ function App() {
   let store = configureStore({
     authentication: userId
   });
-  window.store = store;
 
   if (loading) return null;
 
@@ -37,8 +36,8 @@ function App() {
           <Route exact path="/">
             <h1>My Home Page</h1>
           </Route>
-          <Route path="/login" render={() => <Login userId={userId}></Login>}/>
-          <Route path="/SignUp" render={() => <SignUp userId={userId}></SignUp>}/>
+          <Route exact path="/login" component={Login}/>
+          <Route path="/SignUp" component={SignUp}/>
         </Switch>
       </Provider>
     </BrowserRouter>

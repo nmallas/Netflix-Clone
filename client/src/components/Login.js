@@ -10,7 +10,8 @@ class Login extends React.Component{
         super(props);
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            userId: props.userId
         }
     }
 
@@ -24,8 +25,12 @@ class Login extends React.Component{
         this.props.createUser(this.state);
     }
 
+    handleDemo = e => {
+        e.preventDefault();
+        this.props.createUser({email: "demo@user.io", password:"password"});
+    }
+
     render() {
-        console.log(this.props.userId)
         if(this.props.userId) {
             return(
                 <Redirect to="/"/>
@@ -53,12 +58,18 @@ class Login extends React.Component{
                         onChange={this.updateInput}
                     />
                     <button type="submit" className="form-input" id="signIn"> Sign In</button>
+                    <button type="button" className="form-input" id="demo" onClick={this.handleDemo}> Sign In As Demo User</button>
                 </form>
+                <div><h4> New to NickFlix?</h4><h4 id="signUpNow"><a href="/signup">Sign Up Now!</a></h4></div>
             </div>
         </div>
         )
     }
 }
+
+const mapStateToProps = (state) => ({
+    userId: state.authentication
+})
 
 const mapDispatchToProps = (dispatch) => ({
     createUser: (user) => dispatch(login(user))
@@ -66,7 +77,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 const connectedLogin = connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(Login)
 

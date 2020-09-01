@@ -30,9 +30,19 @@ body {
     margin: 2% 10%;
     height: 50px;
     background-color: #333333;
-    font-size: 18px;
+    font-size: 16px;
     border-radius: 4px;
     border: 0px;
+    color: white;
+}
+
+
+input:-webkit-autofill {
+    box-shadow: 0 0 0 1000px #333333 inset !important;
+    /*use inset box-shadow to cover background-color*/
+    -webkit-text-fill-color: white !important;
+    /*use text fill color to cover font color*/
+    font-size: 16px !important;
 }
 
 .login-box > h2 {
@@ -49,8 +59,40 @@ body {
     padding: 0, 5%;
 }
 
-#signIn {
+#signIn, #signUp {
     margin-top: 8%;
     background-color: rgb(229,9,22);
     color: white;
+    font-size: 18px;
+}
+
+#demo {
+    background-color: #72bcd4;
+    font-size: 18px;
+}
+
+#demo:hover, #signIn:hover, #signUp:hover {
+    cursor: pointer;
+}
+
+.login-box > div {
+    background-color: transparent;
+    margin: 3% 10%;
+    display: flex;
+    color: #737373;
+    font-size: 16px;
+}
+
+#signUpNow {
+    color: white;
+    margin-left: 2%;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
 }

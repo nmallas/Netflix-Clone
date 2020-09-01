@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { signUp } from "../store/authReducer";
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { Redirect } from "react-router-dom";
+import "../styles/auth.css"
 
 
 
@@ -12,7 +13,8 @@ export default function SignUp(props) {
     const [password, setPassword] = useState("");
     const [confirmPassword, setconfirmPassword] = useState("");
     const dispatch = useDispatch();
-    const userId = props.userId;
+    const userId = useSelector((state) => state.authentication.id);
+    console.log(userId);
 
     const updateEmail = e => setEmail(e.target.value);
     const updatePassword = e => setPassword(e.target.value);
@@ -23,35 +25,38 @@ export default function SignUp(props) {
     }
 
     return userId ? <Redirect to="/"/> : (
-        <>
-            <h2> Sign Up</h2>
-            <form className="registration" onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="email"
-                    value={email}
-                    placeholder="Email Address"
-                    className="form-input"
-                    onChange={updateEmail}
-                />
-                <input
-                    type="password"
-                    name="password"
-                    value={password}
-                    placeholder="Password"
-                    className="form-input"
-                    onChange={updatePassword}
-                />
-                <input
-                    type="password"
-                    name="confirmPassword"
-                    value={confirmPassword}
-                    placeholder="Confirm Password"
-                    className="form-input"
-                    onChange={updateConfirmPassword}
-                />
-                <button type="submit" className="form-input"> Sign Up</button>
-            </form>
-        </>
+        <div className="login-container">
+            <div className="login-box">
+                <h2> Sign Up</h2>
+                <form className="registration" onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        name="email"
+                        value={email}
+                        placeholder="Email Address"
+                        className="form-input"
+                        onChange={updateEmail}
+                    />
+                    <input
+                        type="password"
+                        name="password"
+                        value={password}
+                        placeholder="Password"
+                        className="form-input"
+                        onChange={updatePassword}
+                    />
+                    <input
+                        type="password"
+                        name="confirmPassword"
+                        value={confirmPassword}
+                        placeholder="Confirm Password"
+                        className="form-input"
+                        onChange={updateConfirmPassword}
+                    />
+                    <button type="submit" className="form-input" id="signUp"> Sign Up</button>
+                </form>
+                <div><h4> Already Have an Account?</h4><h4 id="signUpNow"><a href="/login">Log In!</a></h4></div>
+            </div>
+        </div>
     )
 }
