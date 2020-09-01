@@ -48,7 +48,6 @@ export function login({email, password}) {
         })
         if(res.ok) {
             let currentUser = await res.json();
-            console.log(currentUser.user.id);
             dispatch(setUser(currentUser.user.id));
             return res;
         }
@@ -56,7 +55,6 @@ export function login({email, password}) {
 }
 
 export function signUp({email, password, confirmPassword}) {
-    console.log({email, password, confirmPassword})
     return async dispatch => {
         const res = await fetch("/api/users", {
             method: "POST",
@@ -68,9 +66,7 @@ export function signUp({email, password, confirmPassword}) {
             body: JSON.stringify({email, password, confirmPassword})
         })
         if(res.ok) {
-            console.log("succesfully created user");
             let currentUser = await res.json();
-            console.log(currentUser)
             dispatch(createUser(currentUser.user.id))
         }
     }
@@ -85,7 +81,6 @@ export const logOut = () => {
             headers: {
                 "Content-Type": "application/json",
                 "XSRF-TOKEN": Cookies.get("XSRF-TOKEN")
-
             },
             body: ""
         });

@@ -7,7 +7,6 @@ import MainContent from "./components/MainContent";
 function App() {
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState("");
-  console.log(userId);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -26,10 +25,6 @@ function App() {
     authentication: {id: userId}
   });
 
-
-  // loadUser();
-
-  console.log(store.getState())
 
   if (loading) return null;
 

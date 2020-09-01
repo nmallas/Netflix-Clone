@@ -10,7 +10,6 @@ export default function Logout(props) {
 
     const handleLogout = async() => {
         let success = await dispatch(logOut());
-        console.log(success);
         if(success) {
             return <Redirect to="/login"/>
         }

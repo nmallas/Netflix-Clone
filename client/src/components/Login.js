@@ -21,7 +21,6 @@ class Login extends React.Component{
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("submitting");
         this.props.createUser(this.state);
     }
 

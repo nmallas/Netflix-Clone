@@ -14,7 +14,6 @@ export default function SignUp(props) {
     const [confirmPassword, setconfirmPassword] = useState("");
     const dispatch = useDispatch();
     const userId = useSelector((state) => state.authentication.id);
-    console.log(userId);
 
     const updateEmail = e => setEmail(e.target.value);
     const updatePassword = e => setPassword(e.target.value);

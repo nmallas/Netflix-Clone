@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
     margin: 0;
+    font-family: sans-serif;
 }
 
 body {
@@ -27,7 +28,7 @@ body {
 
 .form-input {
     padding: 10px 5%;
-    margin: 2% 10%;
+    margin: 2% 8%;
     height: 50px;
     background-color: #333333;
     font-size: 16px;
@@ -45,11 +46,16 @@ input:-webkit-autofill {
     font-size: 16px !important;
 }
 
+input:focus {
+    outline: none;
+    background-color: #494949;
+}
+
 .login-box > h2 {
     color: white;
     background-color: transparent;
-    font-size: 2em;
-    margin: 5% 10%;
+    font-size: 1.75em;
+    margin: 5% 8%;
 }
 
 .registration {
@@ -63,12 +69,12 @@ input:-webkit-autofill {
     margin-top: 8%;
     background-color: rgb(229,9,22);
     color: white;
-    font-size: 18px;
+    font-size: 17px;
 }
 
 #demo {
     background-color: #72bcd4;
-    font-size: 18px;
+    font-size: 17px;
 }
 
 #demo:hover, #signIn:hover, #signUp:hover {
@@ -80,7 +86,7 @@ input:-webkit-autofill {
     margin: 3% 10%;
     display: flex;
     color: #737373;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 #signUpNow {

@@ -8,7 +8,6 @@ import Home from './Home';
 export default function MainContent() {
 
     const userId = useSelector((state) => state.authentication.id);
-    console.log(userId);
 
     const ProtectedRoute = ({path, component, exact}) => {
         if(!userId ) {
