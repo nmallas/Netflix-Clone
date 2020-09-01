@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
-
 if (process.env.NODE_ENV !== 'production') {
   const getCSRFToken = () => {
     return fetch("/api/csrf/token", {
@@ -15,7 +14,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 ReactDOM.render(
   <React.StrictMode>
-    <App/>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

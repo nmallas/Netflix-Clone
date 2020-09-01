@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Login from './components/Login';
-import SignUp from './components/SignUp';
+import { BrowserRouter} from 'react-router-dom';
 import { Provider } from "react-redux";
 import configureStore from "./store/configureStore";
-import Home from './components/Home';
+import MainContent from "./components/MainContent";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -23,21 +21,24 @@ function App() {
     loadUser();
   }, []);
 
+
   let store = configureStore({
-    authentication: userId
+    authentication: {id: userId}
   });
+
+
+  // loadUser();
+
+  console.log(store.getState())
 
   if (loading) return null;
 
-  console.log(store.getState())
+
+
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <Switch>
-          <Route exact path="/" component={Home}/>
-          <Route exact path="/login" component={Login}/>
-          <Route path="/SignUp" component={SignUp}/>
-        </Switch>
+        <MainContent/>
       </Provider>
     </BrowserRouter>
   );

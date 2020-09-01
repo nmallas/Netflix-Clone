@@ -68,7 +68,7 @@ class Login extends React.Component{
 }
 
 const mapStateToProps = (state) => ({
-    userId: state.authentication
+    userId: state.authentication.id
 })
 
 const mapDispatchToProps = (dispatch) => ({

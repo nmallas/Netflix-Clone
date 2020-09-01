@@ -90,7 +90,8 @@ export const logOut = () => {
             body: ""
         });
         if(res.ok) {
-            dispatch(logoutUser())
+            dispatch(logoutUser());
+            return "success";
         }
         return;
     }
