@@ -6,6 +6,7 @@ const { User } = require("../../db/models");
 const { handleValidationErrors } = require("../util/validation");
 const { requireUser, generateToken, AuthenticationError } = require("../util/auth");
 const { jwtConfig: { expiresIn }} = require('../../config');
+const Cookies = require("js-cookie")
 
 const router = express.Router();
 
@@ -47,5 +48,18 @@ router.put(
     return next(new Error('Invalid credentials'));
   })
 );
+
+router.post("/logout", asyncHandler((req, res) => {
+  try {
+    res.cookie("token", "", {
+      expires: new Date(Date.now() - 900000)
+    });
+    res.json({
+      message: "Success!"
+    })
+  } catch(e) {
+    next(e)
+  }
+}))
 
 module.exports = router;

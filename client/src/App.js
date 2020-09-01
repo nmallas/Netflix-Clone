@@ -4,6 +4,7 @@ import Login from './components/Login';
 import SignUp from './components/SignUp';
 import { Provider } from "react-redux";
 import configureStore from "./store/configureStore";
+import Home from './components/Home';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -33,9 +34,7 @@ function App() {
     <BrowserRouter>
       <Provider store={store}>
         <Switch>
-          <Route exact path="/">
-            <h1>My Home Page</h1>
-          </Route>
+          <Route exact path="/" component={Home}/>
           <Route exact path="/login" component={Login}/>
           <Route path="/SignUp" component={SignUp}/>
         </Switch>

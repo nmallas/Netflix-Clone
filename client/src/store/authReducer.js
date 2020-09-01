@@ -2,13 +2,17 @@ import Cookies from "js-cookie";
 
 const LOGIN = "auth/login";
 const CREATE = "auth/create";
+const LOGOUT = "auth/logout";
+
 
 const authReducer = (state = {}, action) => {
     switch(action.type) {
         case LOGIN:
             return {id: action.id};
         case CREATE:
-            return {id: action.id}
+            return {id: action.id};
+        case LOGOUT:
+            return {};
         default:
             return state;
     }
@@ -27,6 +31,10 @@ const createUser = (id) => {
         id
     }
 }
+
+const logoutUser = () => ({
+    type: LOGOUT
+})
 
 export function login({email, password}) {
     return async (dispatch) => {
@@ -70,5 +78,22 @@ export function signUp({email, password, confirmPassword}) {
 
 window.login = login;
 
+export const logOut = () => {
+    return async function(dispatch) {
+        let res = await fetch("/api/session/logout", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "XSRF-TOKEN": Cookies.get("XSRF-TOKEN")
+
+            },
+            body: ""
+        });
+        if(res.ok) {
+            dispatch(logoutUser())
+        }
+        return;
+    }
+}
 
 export default authReducer;
