@@ -1,12 +1,18 @@
 * {
-    background-color: aqua;
     box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    background-image: url("../images/movie-photo.jpg")
 }
 
 .login-container {
     display: flex;
     justify-content: center;
-    margin-top: 15%;
+    margin-top: 7.5%;
+    border-radius: 4px;
+    margin-bottom: 7.5%;
 }
 
 .login-box {
@@ -14,14 +20,37 @@
     justify-self: center;
     flex-direction: column;
     width: 60%;
-    padding: 10%;
+    max-width: 500px;
+    padding: 7%;
     background-color: rgba(0, 0, 0, 0.75)
+}
+
+.form-input {
+    padding: 10px 5%;
+    margin: 2% 10%;
+    height: 50px;
+    background-color: #333333;
+    font-size: 18px;
+    border-radius: 4px;
+    border: 0px;
+}
+
+.login-box > h2 {
+    color: white;
+    background-color: transparent;
+    font-size: 2em;
+    margin: 5% 10%;
 }
 
 .registration {
     display: flex;
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: transparent;
     padding: 0, 5%;
+}
 
+#signIn {
+    margin-top: 8%;
+    background-color: rgb(229,9,22);
+    color: white;
 }

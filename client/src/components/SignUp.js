@@ -31,6 +31,7 @@ export default function SignUp(props) {
                     name="email"
                     value={email}
                     placeholder="Email Address"
+                    className="form-input"
                     onChange={updateEmail}
                 />
                 <input
@@ -38,6 +39,7 @@ export default function SignUp(props) {
                     name="password"
                     value={password}
                     placeholder="Password"
+                    className="form-input"
                     onChange={updatePassword}
                 />
                 <input
@@ -45,9 +47,10 @@ export default function SignUp(props) {
                     name="confirmPassword"
                     value={confirmPassword}
                     placeholder="Confirm Password"
+                    className="form-input"
                     onChange={updateConfirmPassword}
                 />
-                <button type="submit"> Sign Up</button>
+                <button type="submit" className="form-input"> Sign Up</button>
             </form>
         </>
     )

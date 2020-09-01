@@ -34,13 +34,14 @@ class Login extends React.Component{
         return(
         <div className="login-container">
             <div className="login-box">
-                <h1>Sign In</h1>
+                <h2>Sign In</h2>
                 <form onSubmit={this.handleSubmit} className="registration">
                     <input
                         type="text"
                         name="email"
                         value={this.email}
                         placeholder="Email Address"
+                        className="form-input"
                         onChange={this.updateInput}
                     />
                     <input
@@ -48,9 +49,10 @@ class Login extends React.Component{
                         name="password"
                         value={this.password}
                         placeholder="Password"
+                        className="form-input"
                         onChange={this.updateInput}
                     />
-                    <button type="submit"> Sign In</button>
+                    <button type="submit" className="form-input" id="signIn"> Sign In</button>
                 </form>
             </div>
         </div>
