@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './components/Login';
 import { useSelector } from "react-redux";
+import SignUp from './components/SignUp';
 
 
 
@@ -32,6 +33,7 @@ function App() {
             <h1>My Home Page</h1>
           </Route>
           <Route path="/login" component={Login}/>
+          <Route path="/SignUp" component={SignUp}/>
         </Switch>
     </BrowserRouter>
   );
