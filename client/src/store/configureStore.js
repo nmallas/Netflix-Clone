@@ -15,6 +15,8 @@ if (process.env.NODE_ENV !== 'production') {
   storeEnhancer = applyMiddleware(thunk);
 }
 
+// const cookieStore =
+
 export default function configureStore(initialState) {
   return createStore(
     rootReducer,

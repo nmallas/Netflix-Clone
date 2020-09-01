@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { signUp } from "../store/authReducer";
-import { useDispatch } from "react-redux";
+import { useDispatch} from "react-redux";
+import { Redirect } from "react-router-dom";
 
 
 
@@ -11,6 +12,7 @@ export default function SignUp(props) {
     const [password, setPassword] = useState("");
     const [confirmPassword, setconfirmPassword] = useState("");
     const dispatch = useDispatch();
+    const userId = props.userId;
 
     const updateEmail = e => setEmail(e.target.value);
     const updatePassword = e => setPassword(e.target.value);
@@ -20,10 +22,10 @@ export default function SignUp(props) {
         dispatch(signUp({email, password, confirmPassword}))
     }
 
-    return (
+    return userId ? <Redirect to="/"/> : (
         <>
             <h2> Sign Up</h2>
-            <form onSubmit={handleSubmit}>
+            <form className="registration" onSubmit={handleSubmit}>
                 <input
                     type="text"
                     name="email"

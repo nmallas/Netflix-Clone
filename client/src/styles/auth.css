@@ -1,0 +1,27 @@
+* {
+    background-color: aqua;
+    box-sizing: border-box;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15%;
+}
+
+.login-box {
+    display: flex;
+    justify-self: center;
+    flex-direction: column;
+    width: 60%;
+    padding: 10%;
+    background-color: rgba(0, 0, 0, 0.75)
+}
+
+.registration {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 0, 5%;
+
+}
