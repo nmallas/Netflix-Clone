@@ -1,7 +1,7 @@
 import React from "react";
 import {login} from "../store/authReducer";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import "../styles/auth.css"
 
 
@@ -43,6 +43,7 @@ class Login extends React.Component{
                     <input
                         type="text"
                         name="email"
+                        autoComplete="off"
                         value={this.email}
                         placeholder="Email Address"
                         className="form-input"
@@ -59,7 +60,7 @@ class Login extends React.Component{
                     <button type="submit" className="form-input" id="signIn"> Sign In</button>
                     <button type="button" className="form-input" id="demo" onClick={this.handleDemo}> Sign In As Demo User</button>
                 </form>
-                <div><h4> New to NickFlix?</h4><h4 id="signUpNow"><a href="/signup">Sign Up Now!</a></h4></div>
+                <div><h4> New to NickFlix?</h4><h4 id="signUpNow"><Link to="/signUp">Sign Up Now!</Link></h4></div>
             </div>
         </div>
         )

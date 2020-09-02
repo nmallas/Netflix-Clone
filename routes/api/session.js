@@ -49,7 +49,7 @@ router.put(
   })
 );
 
-router.post("/logout", asyncHandler((req, res) => {
+router.delete("/logout", asyncHandler((req, res) => {
   try {
     res.cookie("token", "", {
       expires: new Date(Date.now() - 900000)

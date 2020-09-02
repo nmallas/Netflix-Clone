@@ -1,16 +1,13 @@
 import Cookies from "js-cookie";
 
 const LOGIN = "auth/login";
-const CREATE = "auth/create";
 const LOGOUT = "auth/logout";
 
 
 const authReducer = (state = {}, action) => {
     switch(action.type) {
         case LOGIN:
-            return {id: action.id};
-        case CREATE:
-            return {id: action.id};
+            return {id: action.id, email: action.email};
         case LOGOUT:
             return {};
         default:
@@ -18,17 +15,11 @@ const authReducer = (state = {}, action) => {
     }
 }
 
-const setUser = (id) => {
+const setUser = (id, email) => {
     return {
         type: LOGIN,
-        id
-    }
-}
-
-const createUser = (id) => {
-    return {
-        type: CREATE,
-        id
+        id,
+        email
     }
 }
 
@@ -48,7 +39,7 @@ export function login({email, password}) {
         })
         if(res.ok) {
             let currentUser = await res.json();
-            dispatch(setUser(currentUser.user.id));
+            dispatch(setUser(currentUser.user.id, currentUser.user.email));
             return res;
         }
     }
@@ -67,7 +58,7 @@ export function signUp({email, password, confirmPassword}) {
         })
         if(res.ok) {
             let currentUser = await res.json();
-            dispatch(createUser(currentUser.user.id))
+            dispatch(setUser(currentUser.user.id, currentUser.user.email))
         }
     }
 }
@@ -77,12 +68,10 @@ window.login = login;
 export const logOut = () => {
     return async function(dispatch) {
         let res = await fetch("/api/session/logout", {
-            method: "POST",
+            method: "DELETE",
             headers: {
-                "Content-Type": "application/json",
                 "XSRF-TOKEN": Cookies.get("XSRF-TOKEN")
-            },
-            body: ""
+            }
         });
         if(res.ok) {
             dispatch(logoutUser());

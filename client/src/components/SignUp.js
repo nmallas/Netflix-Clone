@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { signUp } from "../store/authReducer";
 import { useDispatch, useSelector} from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import "../styles/auth.css"
 
 
@@ -31,6 +31,7 @@ export default function SignUp(props) {
                     <input
                         type="text"
                         name="email"
+                        autoComplete="off"
                         value={email}
                         placeholder="Email Address"
                         className="form-input"
@@ -54,7 +55,7 @@ export default function SignUp(props) {
                     />
                     <button type="submit" className="form-input" id="signUp"> Sign Up</button>
                 </form>
-                <div><h4> Already Have an Account?</h4><h4 id="signUpNow"><a href="/login">Log In!</a></h4></div>
+                <div><h4> Already Have an Account?</h4><h4 id="signUpNow"><Link to="/login">Log In!</Link></h4></div>
             </div>
         </div>
     )
