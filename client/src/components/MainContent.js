@@ -23,7 +23,7 @@ export default function MainContent() {
         <Switch>
           <ProtectedRoute exact path="/" component={Home}/>
           <Route exact path="/login" component={Login}/>
-          <Route path="/SignUp" component={SignUp}/>
+          <Route exact path="/SignUp" component={SignUp}/>
         </Switch>
     )
 }

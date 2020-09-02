@@ -36,31 +36,33 @@ class Login extends React.Component{
             )
         }
         return(
-        <div className="login-container">
-            <div className="login-box">
-                <h2>Sign In</h2>
-                <form onSubmit={this.handleSubmit} className="registration">
-                    <input
-                        type="text"
-                        name="email"
-                        autoComplete="off"
-                        value={this.email}
-                        placeholder="Email Address"
-                        className="form-input"
-                        onChange={this.updateInput}
-                    />
-                    <input
-                        type="password"
-                        name="password"
-                        value={this.password}
-                        placeholder="Password"
-                        className="form-input"
-                        onChange={this.updateInput}
-                    />
-                    <button type="submit" className="form-input" id="signIn"> Sign In</button>
-                    <button type="button" className="form-input" id="demo" onClick={this.handleDemo}> Sign In As Demo User</button>
-                </form>
-                <div><h4> New to NickFlix?</h4><h4 id="signUpNow"><Link to="/signUp">Sign Up Now!</Link></h4></div>
+        <div className="auth-pages">
+            <div className="login-container">
+                <div className="login-box">
+                    <h2>Sign In</h2>
+                    <form onSubmit={this.handleSubmit} className="registration">
+                        <input
+                            type="text"
+                            name="email"
+                            autoComplete="off"
+                            value={this.email}
+                            placeholder="Email Address"
+                            className="form-input"
+                            onChange={this.updateInput}
+                        />
+                        <input
+                            type="password"
+                            name="password"
+                            value={this.password}
+                            placeholder="Password"
+                            className="form-input"
+                            onChange={this.updateInput}
+                        />
+                        <button type="submit" className="form-input" id="signIn"> Sign In</button>
+                        <button type="button" className="form-input" id="demo" onClick={this.handleDemo}> Sign In As Demo User</button>
+                    </form>
+                    <div><h4> New to NickFlix?</h4><h4 id="signUpNow"><Link to="/signUp">Sign Up Now!</Link></h4></div>
+                </div>
             </div>
         </div>
         )
