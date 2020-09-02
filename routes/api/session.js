@@ -17,15 +17,12 @@ const validateLogin = [
 
 router.get(
   "/",
-  requireUser,
-  asyncHandler(async function (req, res) {
-    if (req.user) {
+  getCurrentUser,
+  function (req, res) {
       return res.json({
         user: req.user
       });
-    }
-    next(new AuthenticationError());
-  })
+  }
 );
 
 router.put(
