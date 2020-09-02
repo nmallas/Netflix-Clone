@@ -7,6 +7,7 @@ import MainContent from "./components/MainContent";
 function App() {
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState("");
+  const [userEmail, setUserEmail] = useState("")
 
   useEffect(() => {
     const loadUser = async () => {
@@ -14,6 +15,7 @@ function App() {
       if (res.ok) {
         res.data = await res.json();
         setUserId(res.data.user.id);
+        setUserEmail(res.data.user.email);
       }
       setLoading(false);
     }
@@ -22,7 +24,7 @@ function App() {
 
 
   let store = configureStore({
-    authentication: {id: userId}
+    authentication: {id: userId, email: userEmail}
   });
 
 
