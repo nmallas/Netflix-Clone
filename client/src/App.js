@@ -1,27 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter} from 'react-router-dom';
+import { Provider } from "react-redux";
+import configureStore from "./store/configureStore";
+import MainContent from "./components/MainContent";
+
 function App() {
   const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
     const loadUser = async () => {
-      // enter your back end route to get the current user
       const res = await fetch("/api/session");
       if (res.ok) {
-        res.data = await res.json(); // current user info
+        res.data = await res.json();
+        setUserId(res.data.user.id);
       }
       setLoading(false);
     }
     loadUser();
   }, []);
 
+
+  let store = configureStore({
+    authentication: {id: userId}
+  });
+
+
   if (loading) return null;
+
+
 
   return (
     <BrowserRouter>
-      <Route path="/">
-        <h1>My Home Page</h1>
-      </Route>
+      <Provider store={store}>
+        <MainContent/>
+      </Provider>
     </BrowserRouter>
   );
 }

@@ -11,8 +11,8 @@ const {
 
 
 const validateSignup = [
-  check("username", "must be between 5 and 70 characters")
-    .isLength({ min: 5, max: 70 }),
+  // check("username", "must be between 5 and 70 characters")
+  //   .isLength({ min: 5, max: 70 }),
   check("email", "must be a valid email")
     .exists()
     .isEmail(),
@@ -36,7 +36,6 @@ router.post(
   handleValidationErrors,
   asyncHandler(async function (req, res) {
     const user = await User.signup(req.body);
-
     const token = await generateToken(user);
     res.cookie("token", token, {
       maxAge: expiresIn * 1000, // maxAge in milliseconds

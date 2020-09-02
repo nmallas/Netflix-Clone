@@ -4,27 +4,25 @@ const { check } = require("express-validator");
 
 const { User } = require("../../db/models");
 const { handleValidationErrors } = require("../util/validation");
-const { requireUser, generateToken, AuthenticationError } = require("../util/auth");
+const { getCurrentUser, requireUser, generateToken, AuthenticationError } = require("../util/auth");
 const { jwtConfig: { expiresIn }} = require('../../config');
+const Cookies = require("js-cookie")
 
 const router = express.Router();
 
 const validateLogin = [
-  check("username").exists(),
+  check("email").exists(),
   check("password").exists(),
 ];
 
 router.get(
   "/",
-  requireUser,
-  asyncHandler(async function (req, res, next) {
-    if (req.user) {
+  getCurrentUser,
+  function (req, res) {
       return res.json({
         user: req.user
       });
-    }
-    next(new AuthenticationError());
-  })
+  }
 );
 
 router.put(
@@ -47,5 +45,18 @@ router.put(
     return next(new Error('Invalid credentials'));
   })
 );
+
+router.delete("/logout", asyncHandler((req, res) => {
+  try {
+    res.cookie("token", "", {
+      expires: new Date(Date.now() - 900000)
+    });
+    res.json({
+      message: "Success!"
+    })
+  } catch(e) {
+    next(e)
+  }
+}))
 
 module.exports = router;
