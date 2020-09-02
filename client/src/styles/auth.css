@@ -21,7 +21,7 @@ body {
     justify-self: center;
     flex-direction: column;
     width: 60%;
-    max-width: 500px;
+    max-width: 525px;
     padding: 7%;
     background-color: rgba(0, 0, 0, 0.75)
 }
@@ -87,6 +87,7 @@ input:focus {
     display: flex;
     color: #737373;
     font-size: 15px;
+    flex-flow: row wrap;
 }
 
 #signUpNow {
@@ -101,4 +102,10 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+@media screen and (max-width: 675px), (min-width: 1450px) {
+    .login-box > div {
+        justify-content: space-around;
+    }
 }
