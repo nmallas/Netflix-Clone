@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/home.css";
-import FeatureImage from "./FeatureImage";
+
 
 class ContentRow extends React.Component {
     constructor(props) {
@@ -32,6 +32,7 @@ class ContentRow extends React.Component {
             <div className="rowContainer">
                 <h4 className="category-title"> {this.state.category} </h4>
                 <div className="contentContainer">
+                    {/* issue= if src is invalid returns an empty photo image */}
                     {this.state.content.map(vid => (
                         <img className="content"
                             key={`${this.state.category}${vid.id}`}
