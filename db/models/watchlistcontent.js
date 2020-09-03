@@ -6,7 +6,9 @@ module.exports = (sequelize, DataTypes) => {
     movie: DataTypes.BOOLEAN
   }, {});
   WatchListContent.associate = function(models) {
-    // associations can be defined here
+    WatchListContent.belongsTo(models.WatchList, {
+      foreignKey: "watchListId"
+    })
   };
   return WatchListContent;
 };

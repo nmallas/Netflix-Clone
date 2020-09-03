@@ -7,7 +7,12 @@ module.exports = (sequelize, DataTypes) => {
     watchListId: DataTypes.INTEGER
   }, {});
   Profile.associate = function(models) {
-    // associations can be defined here
+    Profile.belongsTo(models.User, {
+      foreignKey: "userId"
+    })
+    Profile.belongsTo(models.WatchList, {
+      foreignKey: "watchListId"
+    })
   };
   return Profile;
 };
