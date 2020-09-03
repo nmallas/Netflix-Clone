@@ -1,5 +1,4 @@
 import React from "react";
-import routes from "../routes";
 import fetch from "node-fetch"
 
 class FeatureImage extends React.Component {
