@@ -27,7 +27,6 @@ class ContentRow extends React.Component {
 
     render() {
         const topRated = (this.state.category === "Top Rated");
-        //future (this.state.category.indexOf("TV") > -1) ? `tv/${vid.id}` : `movie/${vid.id}`
         return this.state.loading ? null : (
             <div className="rowContainer">
                 <h4 className="category-title"> {this.state.category} </h4>
