@@ -3,10 +3,15 @@ import Logout from "./Logout";
 import "../styles/home.css"
 
 const Header = () => {
+
+
+
     return (
-        <nav className="header">
-            <h3>logo</h3>
-            <Logout/>
+        <nav id="header">
+            <div className="header-container">
+                <h3>logo</h3>
+                <Logout/>
+            </div>
         </nav>
     )
 }

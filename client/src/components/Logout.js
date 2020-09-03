@@ -15,6 +15,6 @@ export default function Logout(props) {
         }
     }
     return(
-        <button type="button" onClick={handleLogout}>Log Out</button>
+        <button type="button" className="logout" onClick={handleLogout}>Log Out</button>
     )
 }

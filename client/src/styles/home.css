@@ -1,4 +1,23 @@
-.header {
+#header {
+    position: fixed;
+    width: 100%;
+    background-color: black;
+    /* background-color: transparent; */
+    z-index: 3;
+}
+
+.scroll {
+    background-color: black;
+}
+
+/* .header::-webkit-scrollbar {
+    background-color: black;
+} */
+
+
+.header-container {
+    width: 80%;
+    margin: 1% auto;
     display: flex;
     justify-content: space-between;
 }
@@ -11,19 +30,19 @@
 }
 
 .content:hover {
-    transform: scale(1.18);
+    transform: scale(1.1, 1.15);
     padding: 0px;
-    margin: 0px 18px;
+    margin: 0px 12px;
     cursor: pointer;
 }
 
 
 .category-title {
-    font-size: 18px;
-    font-weight: 650;
+    font-size: 20px;
+    font-weight: 500;
     color: white;
-    padding: 10px;
-    margin: 0px 15px
+    padding: 20px 10px 0px 10px;
+    margin: 0px 15px;
 }
 
 .contentContainer {
@@ -32,6 +51,10 @@
     padding: 20px;
 }
 
+.contentContainer::-webkit-scrollbar {
+    display: none;
+}
+
 .rowContainer {
-    background-color: black;
+    background-color: #151515;
 }
