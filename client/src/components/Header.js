@@ -1,6 +1,6 @@
 import React from "react";
-import Logout from "./Logout";
 import "../styles/home.css"
+import ProfileImage from "./ProfileImage";
 
 const Header = () => {
 
@@ -10,7 +10,7 @@ const Header = () => {
         <nav id="header">
             <div className="header-container">
                 <h3>logo</h3>
-                <Logout/>
+                <ProfileImage/>
             </div>
         </nav>
     )

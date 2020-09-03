@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/home.css";
+import fetch from "node-fetch";
 
 
 class ContentRow extends React.Component {
@@ -13,17 +14,17 @@ class ContentRow extends React.Component {
     }
 
     async componentDidMount() {
-        let res = await fetch(this.props.route);
+        let res = await fetch(`/api/content/${this.props.route}`);
         if(res.ok) {
             let data = await res.json();
-            console.log(data.results);
-            this.setState({content: data.results, loading: false})
-
+            this.setState({content: data, loading: false})
         }
         return;
     }
 
-
+    async addToList() {
+        // let res = await fetch("/")
+    }
 
     render() {
         const topRated = (this.state.category === "Top Rated");
@@ -33,11 +34,15 @@ class ContentRow extends React.Component {
                 <div className="contentContainer">
                     {/* issue= if src is invalid returns an empty photo image */}
                     {this.state.content.map(vid => (
+                        (!vid.poster_path || !vid.backdrop_path) ? "" :
                         <img className="content"
                             key={`${this.state.category}${vid.id}`}
                             src={`https://image.tmdb.org/t/p/original/${topRated ? vid.poster_path : vid.backdrop_path}`}
-                            alt={vid.original_name}
-                            height={topRated ? "220px" : "125px"}/>))
+                            alt={vid.orignal_name}
+                            data-id={vid.id}
+                            data-poster={vid.poster_path}
+                            height={topRated ? "220px" : "125px"}
+                            onClick={this.addToList}/>))
                     }
                 </div>
             </div>

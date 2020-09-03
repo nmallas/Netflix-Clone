@@ -10,7 +10,35 @@
     background-color: black;
 }
 
+.profile-1 {
+    background-image: url("../images/profile/profileImage-1.svg");
+}
 
+.profile-2 {
+    background-image: url("../images/profile/profileImage-2.svg");
+}
+
+.profile-3 {
+    background-image: url("../images/profile/profileImage-3.svg");
+}
+.profile-4 {
+    background-image: url("../images/profile/profileImage-4.svg");
+}
+.profile-5 {
+    background-image: url("../images/profile/profileImage-5.svg");
+}
+
+.profile {
+    background-repeat: no-repeat;
+    height: 10vw;
+    width: 10vw;
+    max-height: 200px;
+    max-width: 200px;
+    min-height: 84px;
+    min-width: 84px;
+    background-color: white;
+    border:.3em solid rgba(0,0,0,.4);
+}
 
 #feature-container {
     height: 500px;

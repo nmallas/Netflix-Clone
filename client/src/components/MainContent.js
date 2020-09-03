@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Login from './Login';
 import SignUp from './SignUp';
 import Home from './Home';
+import Profile from "./Profile";
 
 export default function MainContent() {
 
@@ -24,6 +25,7 @@ export default function MainContent() {
           <ProtectedRoute exact path="/" component={Home}/>
           <Route exact path="/login" component={Login}/>
           <Route exact path="/SignUp" component={SignUp}/>
+          <ProtectedRoute exact path="/profiles" component={Profile}/>
         </Switch>
     )
 }
