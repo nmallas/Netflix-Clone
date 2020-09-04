@@ -27,26 +27,135 @@
 .profile-5 {
     background-image: url("../images/profile/profileImage-5.svg");
 }
+.profile-10 {
+    background-image: url("../images/profile/profileImage-10.svg");
+}
 
 .profile {
     background-repeat: no-repeat;
-    height: 10vw;
-    width: 10vw;
-    max-height: 200px;
-    max-width: 200px;
+    background-position: center;
+    height: 16vw;
+    width: 16vw;
+    max-height: 180px;
+    max-width: 180px;
     min-height: 84px;
     min-width: 84px;
-    background-color: white;
-    border:.3em solid rgba(0,0,0,.4);
+    margin: 1vh 2vw;
+    border-radius: 2%;
+    /* background-color: white;
+    border:.3em solid rgba(0,0,0,.4); */
+    display: flex;
+    justify-items: center;
+}
+
+.profile-image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #151515;
+}
+
+.profile-name {
+    margin: auto;
+    margin: 2vw;
+    color: white;
+    font-size: 20px;
+}
+
+.new-profile-form {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #151515;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#profile-input {
+    background-color: #666666;
+    color: white;
+    font-size: 18px;
+    width: 90%;
+    margin: 10px;
+    padding: 5px;
+}
+
+#profile-imput-webkit-autofill {
+    box-shadow: 0 0 0 1000px #333333 inset !important;
+    /*use inset box-shadow to cover background-color*/
+    -webkit-text-fill-color: white !important;
+    /*use text fill color to cover font color*/
+    font-size: 16px !important;
+}
+
+::-webkit-input-placeholder {
+    color: rgba(211, 211, 211, 0.603);
+}
+
+#new-profile-button {
+    background-color: rgb(229,9,22);
+    font-weight: 600px;
+    color: white;
+    font-size: 18px;
+    width: 90%;
+    margin: 10px;
+    padding: 8px;
+}
+
+#new-profile-button {
+    cursor: pointer;
+}
+
+#new-profile-select {
+    /* background-color: rgb(229,9,22);
+    color: white; */
+    font-size: 18px;
+    width: 90%;
+    margin: 10px;
+    padding: 5px;
 }
 
 .header-image {
     background-repeat: no-repeat;
-    height: 50px;
-    width: 50px;
+    position: absolute;
+    right: 9%;
+    height: 55px;
+    width: 55px;
     background-color: transparent;
     background-position: center;
 }
+
+
+.add-profile {
+    font-size: 30px;
+    color: white;
+    margin: 2% 0;
+}
+
+.profile-description {
+    font-size: 15px;
+    color: white;
+    margin: 2% 0;
+}
+
+.new-profile-select {
+    width: 90%;
+    margin: 10px;
+    padding: 5px;
+}
+
+
+
 
 .hidden {
     display: none !important;
