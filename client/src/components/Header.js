@@ -1,12 +1,8 @@
 import React from "react";
 import "../styles/home.css"
 import HeaderImage from "./HeaderImage";
-import LogoutModal from "./LogoutModal";
 
 const Header = () => {
-
-
-
     return (
         <nav id="header">
             <div className="header-container">

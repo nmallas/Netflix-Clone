@@ -4,9 +4,6 @@ import Logout from "./Logout";
 import "../styles/home.css"
 
 class LogoutModal extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (

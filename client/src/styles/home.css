@@ -101,22 +101,19 @@
     background-size: cover;
     object-fit: cover;
     margin-bottom: 25px;
-    /* -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0))); */
-    /* mask-image: linear-gradient(to bottom, transparent 10%, black); */
-    /* mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0)); */
     mask-image: linear-gradient(to top, transparent 7%, black 42%);
 
 }
 
 .feature-title {
     color: white;
-    font-size: 35px;
+    font-size: 40px;
     position: absolute;
-    max-width: 25%;
+    max-width: 30%;
     z-index: 4;
     top: 100px;
     left: 50px;
-    background-color: rgba(0,0,0,.03);
+    background-color: rgba(0,0,0,.05);
 }
 
 .header-container {
