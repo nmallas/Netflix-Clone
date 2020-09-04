@@ -16,10 +16,8 @@ class FeatureImage extends React.Component {
         let res = await fetch(`/api/content/ctv`);
         if(res.ok) {
             let data = await res.json();
-            console.log(data);
             let randomIndex = this.randomNum(data.length - 1);
             this.setState({currentVid: data[randomIndex]});
-            console.log(this.state);
         }
     }
 

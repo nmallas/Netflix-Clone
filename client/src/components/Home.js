@@ -14,9 +14,17 @@ const categories = {
     'Scifi TV Shows': `stv`,
 }
 
+const hideModal = e => {
+    let modal = document.getElementById("modal-container");
+    if(e.target !== modal) {
+        modal.classList.add("hidden");
+    }
+}
+
+
 const Home = () => {
     return (
-        <div>
+        <div onClick={hideModal}>
             <Header/>
             <FeatureImage/>
             {Object.entries(categories).map(category =>

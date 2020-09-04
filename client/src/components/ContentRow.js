@@ -36,7 +36,7 @@ class ContentRow extends React.Component {
                     {this.state.content.map(vid => (
                         (!vid.poster_path || !vid.backdrop_path) ? "" :
                         <img className="content"
-                            key={`${this.state.category}${vid.id}`}
+                            key={`${this.props.route}${vid.id}`}
                             src={`https://image.tmdb.org/t/p/original/${topRated ? vid.poster_path : vid.backdrop_path}`}
                             alt={vid.orignal_name}
                             data-id={vid.id}

@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { logOut } from "../store/authReducer"
 import { Redirect } from "react-router-dom";
+import "../styles/home.css";
 
 
 
