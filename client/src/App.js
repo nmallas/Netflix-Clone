@@ -7,7 +7,9 @@ import MainContent from "./components/MainContent";
 function App() {
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState("");
-  const [userEmail, setUserEmail] = useState("")
+  const [userEmail, setUserEmail] = useState("");
+  const [currentProfile, setCurrentProfile] = useState(null);
+  const [allProfiles, setAllProfiles] = useState([]);
 
   useEffect(() => {
     const loadUser = async () => {
@@ -17,6 +19,7 @@ function App() {
         setUserId(res.data.user.id);
         setUserEmail(res.data.user.email);
       }
+      // const profileRes = await fetch("/api/profiles")
       setLoading(false);
     }
     loadUser();
@@ -24,7 +27,8 @@ function App() {
 
 
   let store = configureStore({
-    authentication: {id: userId, email: userEmail}
+    authentication: {id: userId, email: userEmail},
+    profiles: {current: currentProfile, all: allProfiles}
   });
 
 

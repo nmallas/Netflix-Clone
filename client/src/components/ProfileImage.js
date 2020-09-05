@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function ProfileImage() {
+export default function ProfileImage({picId, name}) {
     return (
         <div className='profile-image-container'>
-            <div className={`profile-2 profile`} />
-            <div className={"profile-name"}> Nick </div>
+            <div className={`profile-${picId} profile`} />
+            <div className={"profile-name"}> {name} </div>
         </div>
     )
 }

@@ -1,12 +1,24 @@
 import React, { useState } from "react";
-
-export default function ProfileImage() {
-    let [name, setName] = useState("");
-    let [imageNum, setImageNum] = useState(5);
+import {createProfile} from "../store/profileReducer"
+import { useDispatch, useSelector } from "react-redux";
 
 
-    const showForm = () => {
-        return;
+
+export default function ProfileImage(props) {
+    const [name, setName] = useState("");
+    const [imageNum, setImageNum] = useState(5);
+    const dispatch = useDispatch();
+    const userId = useSelector((state) => state.authentication.id);
+
+
+    const showForm = (e) => {
+        let form = document.getElementById("new-profile-form")
+        form.classList.remove("hidden");
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        dispatch(createProfile(name, imageNum, userId))
     }
 
     const updateName = e => setName(e.target.value);
@@ -14,13 +26,16 @@ export default function ProfileImage() {
 
     return (
         <>
-            <div className='profile-image-container'>
-                <div className={`profile-10 profile`} onClick={showForm}/>
-            </div>
-            <div className="new-profile-form">
+            {props.numProfiles >= 3 ? null :
+                <div className='profile-image-container'>
+                    <div className={`profile-10 profile`} onClick={showForm}/>
+                </div>
+            }
+            <div id="new-profile-form" className="hidden">
                 <h2 className="add-profile"> Add Profile</h2>
+                <div className={`profile-${imageNum} new-profile`} />
                 <h4 className="profile-description"> Add a profile for another person watching Nickflix</h4>
-                <form >
+                <form onSubmit={handleSubmit}>
                     <input
                         type="text"
                         value={name}
