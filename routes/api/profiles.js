@@ -40,7 +40,10 @@ router.get("/:userId", asyncHandler(async(req, res) => {
     const profiles = await Profile.findAll({
         where: {userId}
     });
-    let profileData = profiles.map(profile => profile.dataValues)
+    let profileData = []
+    if(profiles.length) {
+        profileData = profiles.map(profile => profile.dataValues)
+    }
     res.send(profileData);
 }))
 
