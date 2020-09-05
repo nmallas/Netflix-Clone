@@ -1,9 +1,9 @@
 #header {
     position: fixed;
     width: 100%;
+    /* background-color: black; */
     background-color: transparent;
-    /* background-color: transparent; */
-    z-index: 3;
+    z-index: 5;
 }
 
 .scroll {
@@ -206,23 +206,21 @@
 }
 
 #feature-container {
-    min-height: 525px;
-    max-height: 575px;
+    min-height: 475px;
+    max-height: 500px;
     width: 100%;
     background-color: #151515;
-    padding-bottom: 25px;
 
 }
 
 .feature-image {
-    border-bottom: 3%;
     width: 100%;
     min-height: 575px;
     max-height: 625px;
     background-size: cover;
     object-fit: cover;
-    margin-bottom: 25px;
-    mask-image: linear-gradient(to top, transparent 8%, black 42%);
+    margin-bottom: 10px;
+    mask-image: linear-gradient(to top, transparent 11%, black 45%);
 
 }
 
@@ -242,6 +240,23 @@
     margin: 1% auto;
     display: flex;
     justify-content: space-between;
+}
+
+.logo {
+    background-image: url("../images/Nickflix-logo.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 185px;
+    height: 53px;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 5px;
+}
+
+.logo:hover {
+    background-color: rgba(0,0,0,.8);
+    cursor: pointer;
 }
 
 .content {

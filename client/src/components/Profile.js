@@ -2,11 +2,14 @@ import React from "react";
 import ProfileImage from "./ProfileImage";
 import NewProfile from "./NewProfile";
 import { useSelector } from "react-redux";
+import Header from "./Header"
 
 export default function Profile() {
     const profiles = useSelector((state) => state.profiles.all)
     return(
-        // <div className="profile-page-container"></div>
+        <>
+        <Header/>
+        {/* <h2> Who's Watching?</h2> */}
         <div className="profile-container">
             {profiles.map(profile =>
                 <ProfileImage
@@ -15,5 +18,6 @@ export default function Profile() {
                 />)}
             <NewProfile numProfiles={profiles.length}/>
         </div>
+        </>
     )
 }

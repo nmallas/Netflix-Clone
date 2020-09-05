@@ -4,10 +4,10 @@ import Cookies from "js-cookie";
 
 const CREATE_PROFILE = "profile/create"
 
-export default function profile(state= {current: null, all:[]}, action) {
+export default function profile(state= {current: {}, all:[]}, action) {
     switch(action.type) {
         case CREATE_PROFILE:
-            return {current: action.profile.id, all: [...state.all, action.profile]}
+            return {current: action.profile, all: [...state.all, action.profile]}
         default:
             return state;
     }
@@ -28,7 +28,6 @@ export const createProfile = (name, imageLink, userId) => {
             },
             body: JSON.stringify({name, imageLink, userId})
         })
-        console.log(res);
         if(res.ok) {
             let profile = await res.json();
             dispatch(newProfile(profile));

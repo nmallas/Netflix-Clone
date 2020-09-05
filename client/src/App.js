@@ -12,17 +12,23 @@ function App() {
   const [allProfiles, setAllProfiles] = useState([]);
 
   useEffect(() => {
-    const loadUser = async () => {
+    const loadUserData = async () => {
       const res = await fetch("/api/session");
       if (res.ok) {
         res.data = await res.json();
         setUserId(res.data.user.id);
         setUserEmail(res.data.user.email);
       }
-      // const profileRes = await fetch("/api/profiles")
+      const profileRes = await fetch(`/api/profiles/${res.data.user.id}`);
+        if(profileRes.ok) {
+          let profiles = await profileRes.json();
+          console.log(profiles)
+          setCurrentProfile(profiles.length ? profiles[0] : {});
+          setAllProfiles(profiles)
+        }
       setLoading(false);
     }
-    loadUser();
+    loadUserData();
   }, []);
 
 

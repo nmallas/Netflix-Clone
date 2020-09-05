@@ -31,8 +31,17 @@ router.post("/", asyncHandler(async (req, res) => {
         userId,
         watchListId: watchList.dataValues.id
     })
-    console.log(profile);
+
     res.send(profile.dataValues)
+}))
+
+router.get("/:userId", asyncHandler(async(req, res) => {
+    let userId = req.params.userId;
+    const profiles = await Profile.findAll({
+        where: {userId}
+    });
+    let profileData = profiles.map(profile => profile.dataValues)
+    res.send(profileData);
 }))
 
 
