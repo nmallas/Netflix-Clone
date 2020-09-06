@@ -4,16 +4,18 @@
     font-family: sans-serif;
 }
 
-body {
-    background-image: url("../images/movie-photo.jpg")
+
+.auth-pages {
+    width: 100vw;
+    min-height: 100vh;
+    background-image: url("../images/movie-photo.jpg") ;
+    padding: 7.5%;
 }
 
 .login-container {
     display: flex;
     justify-content: center;
-    margin-top: 7.5%;
     border-radius: 4px;
-    margin-bottom: 7.5%;
 }
 
 .login-box {
@@ -109,6 +111,3 @@ a:hover {
         justify-content: space-around;
     }
 }
-
-
-

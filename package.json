@@ -2,6 +2,7 @@
   "name": "starter",
   "version": "0.0.0",
   "private": true,
+  "engines": {"node": "12.x"},
   "scripts": {
     "start": "per-env",
     "start:development": "nodemon --ignore client/ -r dotenv/config ./bin/www",
@@ -25,6 +26,7 @@
     "js-cookie": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.1",
+    "node-fetch": "^2.6.0",
     "per-env": "^1.0.2",
     "pg": "^8.0.3",
     "sequelize": "^5.21.7",

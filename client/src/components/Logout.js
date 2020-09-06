@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { logOut } from "../store/authReducer"
 import { Redirect } from "react-router-dom";
+import "../styles/home.css";
 
 
 
@@ -15,6 +16,6 @@ export default function Logout(props) {
         }
     }
     return(
-        <button type="button" onClick={handleLogout}>Log Out</button>
+        <button type="button" className="logout" onClick={handleLogout}>Log Out</button>
     )
 }

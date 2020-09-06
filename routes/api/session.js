@@ -4,7 +4,7 @@ const { check } = require("express-validator");
 
 const { User } = require("../../db/models");
 const { handleValidationErrors } = require("../util/validation");
-const { getCurrentUser, requireUser, generateToken, AuthenticationError } = require("../util/auth");
+const { getCurrentUser, generateToken, AuthenticationError } = require("../util/auth");
 const { jwtConfig: { expiresIn }} = require('../../config');
 const Cookies = require("js-cookie")
 
@@ -20,7 +20,7 @@ router.get(
   getCurrentUser,
   function (req, res) {
       return res.json({
-        user: req.user
+        user: req.user || {}
       });
   }
 );
