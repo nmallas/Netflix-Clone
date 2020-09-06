@@ -4,7 +4,7 @@ import "../styles/home.css";
 import {useSelector} from "react-redux"
 
 export default function HeaderImage() {
-    const imageId = useSelector((state) => state.profiles.current.imageLink);
+    const imageId = useSelector((state) => state.profiles.current?.imageLink);
 
     const showModal = e => {
         let modal = document.getElementById("modal-container");

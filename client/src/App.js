@@ -22,7 +22,6 @@ function App() {
       const profileRes = await fetch(`/api/profiles/${res.data.user.id}`);
         if(profileRes.ok) {
           let profiles = await profileRes.json();
-          console.log(profiles)
           setCurrentProfile(profiles.length ? profiles[0] : {});
           setAllProfiles(profiles)
         }
