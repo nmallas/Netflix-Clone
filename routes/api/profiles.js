@@ -47,5 +47,13 @@ router.get("/:userId", asyncHandler(async(req, res) => {
     res.send(profileData);
 }))
 
+router.delete("/:profileId", asyncHandler(async(req, res) => {
+    let id = req.params.profileId;
+    const profile = await Profile.destroy({
+        where: {id}
+    });
+    res.status(200).end();
+}))
+
 
 module.exports = router;

@@ -9,14 +9,18 @@ export default function Profile() {
     return(
         <>
         <Header/>
-        {/* <h2> Who's Watching?</h2> */}
-        <div className="profile-container">
-            {profiles.map(profile =>
-                <ProfileImage
-                    picId={profile.imageLink}
-                    name={profile.name}
-                />)}
-            <NewProfile numProfiles={profiles.length}/>
+        <div className="profile-page">
+            <h2 className="profile-header"> Who's Watching?</h2>
+            <div className="profile-container">
+                {profiles.map(profile =>
+                    <ProfileImage
+                        picId={profile.imageLink}
+                        name={profile.name}
+                        id={profile.id}
+                        key={profile.id}
+                    />)}
+                <NewProfile numProfiles={profiles.length}/>
+            </div>
         </div>
         </>
     )

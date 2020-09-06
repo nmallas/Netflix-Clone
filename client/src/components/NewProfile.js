@@ -28,7 +28,9 @@ export default function ProfileImage(props) {
         <>
             {props.numProfiles >= 3 ? null :
                 <div className='profile-image-container'>
-                    <div className={`profile-10 profile`} onClick={showForm}/>
+                    <div id="create-profile" className={`profile-10 profile`} onClick={showForm}/>
+                    <div className={"profile-name"}>Create Profile</div>
+                    <button className="hidden-button"> Delete Profile</button>
                 </div>
             }
             <div id="new-profile-form" className="hidden">

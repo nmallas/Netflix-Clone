@@ -46,6 +46,7 @@
     border:.3em solid rgba(0,0,0,.4); */
     display: flex;
     justify-self: center;
+    transition: 0.4s;
 }
 
 .profile-image-container {
@@ -54,20 +55,41 @@
     align-items: center;
 }
 
-.profile-container {
+.profile-page {
     height: 100vh;
     width: 100vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background-color: #151515;
+}
+
+.profile-header {
+    font-size: 55px;
+    color: white;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.profile-container {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #151515;
 }
 
+.profile:hover {
+    cursor: pointer;
+    transform: scale(1.1)
+}
+
 .profile-name {
     margin: auto;
     margin: 2vw;
     color: white;
-    font-size: 20px;
+    font-size: 25px;
+    margin-top: 1vw;
 }
 
 #new-profile-form {
@@ -136,21 +158,42 @@
     min-width: 70px;
 }
 
-.header-image {
-    background-repeat: no-repeat;
-    position: absolute;
-    right: 9%;
-    height: 55px;
-    width: 55px;
-    background-color: transparent;
-    background-position: center;
-}
+
 
 
 .add-profile {
     font-size: 30px;
     color: white;
     margin: 2% 0;
+}
+
+.hidden-button {
+    color: transparent;
+    background-color: transparent;
+    box-shadow: none;
+    border: none;
+    font-size: 17px;
+    width: 60%;
+    padding: 2px;
+}
+
+.delete-profile {
+    background-color: rgb(229,9,22);
+    color: white;
+    font-size: 17px;
+    width: 60%;
+    border: none;
+    border-radius: 3px;
+    padding: 2px;
+    /* padding: 5px; */
+}
+
+.delete-profile:hover {
+    cursor: pointer;
+}
+
+.create-profile {
+    margin-bottom: 20px;
 }
 
 .profile-description {
@@ -230,7 +273,7 @@
     position: absolute;
     max-width: 30%;
     z-index: 4;
-    top: 100px;
+    top: 125px;
     left: 50px;
     background-color: rgba(0,0,0,.05);
 }
@@ -240,6 +283,16 @@
     margin: 1% auto;
     display: flex;
     justify-content: space-between;
+}
+
+.header-image {
+    background-repeat: no-repeat;
+    position: absolute;
+    right: 9%;
+    height: 55px;
+    width: 55px;
+    background-color: transparent;
+    background-position: center;
 }
 
 .logo {

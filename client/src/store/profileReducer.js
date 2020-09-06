@@ -2,12 +2,19 @@ import Cookies from "js-cookie";
 
 
 
-const CREATE_PROFILE = "profile/create"
+const CREATE_PROFILE = "profile/create";
+const SET_PROFILE = "profile/setCurrent";
+const REMOVE_PROFILE = "profile/remove";
 
 export default function profile(state= {current: {}, all:[]}, action) {
     switch(action.type) {
         case CREATE_PROFILE:
-            return {current: action.profile, all: [...state.all, action.profile]}
+            return {current: action.profile, all: [...state.all, action.profile]};
+        case SET_PROFILE:
+            return {current: state.all.filter(prof => prof.id === action.id)[0] || {}, all: [...state.all]};
+        case REMOVE_PROFILE:
+            let filtered = state.all.filter(prof => prof.id !== action.id);
+            return filtered.length ? {current: filtered[0], all: filtered} : {current: {}, all:[]};
         default:
             return state;
     }
@@ -16,6 +23,16 @@ export default function profile(state= {current: {}, all:[]}, action) {
 const newProfile = (profile) => ({
     type: CREATE_PROFILE,
     profile
+})
+
+export const setProfile = (id) => ({
+    type: SET_PROFILE,
+    id
+})
+
+const removeProfile = (id) => ({
+    type: REMOVE_PROFILE,
+    id
 })
 
 export const createProfile = (name, imageLink, userId) => {
@@ -36,6 +53,21 @@ export const createProfile = (name, imageLink, userId) => {
         } else {
             alert("Error creating account")
             window.location.href("/")
+        }
+    }
+}
+
+export const deleteProfile = profileId => {
+    return async (dispatch) => {
+        let res = await fetch(`/api/profiles/${profileId}`, {
+            method: "DELETE",
+            headers: {
+                "XSRF-TOKEN": Cookies.get("XSRF-TOKEN")
+            }
+        });
+        console.log(res);
+        if(res.ok) {
+            dispatch(removeProfile(profileId))
         }
     }
 }
