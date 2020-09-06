@@ -5,20 +5,31 @@ class FeatureImage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentVid: ''
+            currentVid: '',
+            vids: [],
+            cancelTimeout: ""
         }
     }
 
-    randomNum = length => Math.floor(Math.random() * length)
+    randomNum = length => Math.floor(Math.random() * length);
+
+    setImage = async() =>{
+        let randomIndex = this.randomNum(this.state.vids.length - 1);
+        let cancel = setTimeout(this.setImage, 12500)
+        this.setState({currentVid: this.state.vids[randomIndex], cancelTimeout: cancel});
+    }
 
     async componentDidMount() {
         let res = await fetch(`/api/content/ctv`);
         if(res.ok) {
             let data = await res.json();
-            console.log(data);
-            let randomIndex = this.randomNum(data.length - 1);
-            this.setState({currentVid: data[randomIndex]});
+            this.setState({vids: data});
+            this.setImage()
         }
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.state.cancelTimeout)
     }
 
     render() {

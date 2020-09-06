@@ -20,8 +20,10 @@ const Home = () => {
             <Header/>
             <FeatureImage/>
             {Object.entries(categories).map(category =>
-                <ContentRow category={category[0]}
-                route={category[1]} />)}
+                <ContentRow
+                    category={category[0]}
+                    route={category[1]}
+                    key={category[1]}/>)}
         </div>
     );
 }
