@@ -20,6 +20,14 @@ router.post("/:watchListId", asyncHandler(async (req, res) => {
     res.json([...watchListContent, newItem]);
 }))
 
+router.get("/:watchListId", asyncHandler(async (req, res) => {
+    let watchListId = req.params.watchListId;
+    let watchListContent = await WatchListContent.findAll({
+        where: {watchListId}
+    })
+    res.json(watchListContent);
+}))
+
 
 
 

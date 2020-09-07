@@ -1,16 +1,16 @@
 import Cookies from "js-cookie";
 
-const ADD_TO_WATCHLIST = "watchlist/add";
+const SET_WATCHLIST = "watchlist/set";
 
-const addToList = (list) => ({
-    type: ADD_TO_WATCHLIST,
+export const setList = (list) => ({
+    type: SET_WATCHLIST,
     list
 })
 
 
 export default function watchListReducer(state=[], action) {
     switch(action.type) {
-        case ADD_TO_WATCHLIST:
+        case SET_WATCHLIST:
             return action.list
         default:
             return state;
@@ -31,7 +31,8 @@ export const watchListAdd = (path, watchlistId) => {
         })
         if(res.ok) {
             let watchListContent = await res.json();
-            dispatch(addToList(watchListContent))
+            console.log(watchListContent);
+            dispatch(setList(watchListContent))
         }
     }
 }

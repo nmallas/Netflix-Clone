@@ -6,6 +6,8 @@ import SignUp from './SignUp';
 import Home from './Home';
 import Profile from "./Profile";
 
+
+
 export default function MainContent() {
 
     const userId = useSelector((state) => state.authentication.id);

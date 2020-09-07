@@ -2,6 +2,7 @@ import React from "react";
 import ContentRow from "./ContentRow";
 import Header from "./Header";
 import FeatureImage from "./FeatureImage";
+import WatchList from "./WatchList";
 
 const categories = {
     'Top Rated': `tr`,
@@ -19,6 +20,7 @@ const Home = () => {
         <div>
             <Header/>
             <FeatureImage/>
+            <WatchList/>
             {Object.entries(categories).map(category =>
                 <ContentRow
                     category={category[0]}
