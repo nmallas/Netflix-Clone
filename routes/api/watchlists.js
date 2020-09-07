@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.post("/:watchListId", asyncHandler(async (req, res) => {
     let watchListId = req.params.watchListId;
-    console.log(watchListId);
     let watchListContent = await WatchListContent.findAll({
         where: {watchListId}
     })

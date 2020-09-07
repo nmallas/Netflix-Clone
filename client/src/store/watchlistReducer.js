@@ -31,7 +31,6 @@ export const watchListAdd = (path, watchlistId) => {
         })
         if(res.ok) {
             let watchListContent = await res.json();
-            console.log(watchListContent);
             dispatch(setList(watchListContent))
         }
     }
@@ -49,7 +48,6 @@ export const watchListDelete = (contentId, watchListId) => {
         })
         if(res.ok) {
             let watchListContent = await res.json();
-            console.log(watchListContent);
             dispatch(setList(watchListContent))
         }
     }

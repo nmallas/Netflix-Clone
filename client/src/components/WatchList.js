@@ -7,7 +7,7 @@ export default function WatchList(){
 
     const dispatch = useDispatch();
     const watchlist = useSelector(state => state.watchList);
-    const watchListId = useSelector(state => state.profiles.current.watchListId);
+    const watchListId = useSelector(state => state.profiles.current?.watchListId);
 
     useEffect(() => {
         const getWatchlist = async (watchListId) => {
@@ -16,8 +16,8 @@ export default function WatchList(){
               let currentWatchList = await res.json();
               dispatch(setList(currentWatchList));
             }
-          }
-          getWatchlist(watchListId)
+        }
+        getWatchlist(watchListId)
     }, [watchListId, dispatch]);
 
     const showButton = e => {
@@ -37,12 +37,11 @@ export default function WatchList(){
     const removeFromList = e => {
         let contentId = e.target.dataset.id;
         if(!contentId) return;
-        console.log(contentId, watchListId)
         dispatch(watchListDelete(contentId, watchListId));
     }
 
 
-    return !watchlist.length ? null : (
+    return (!watchlist.length) ? null : (
         <div className="rowContainer">
             <h4 className="category-title"> My WatchList </h4>
             <div className="contentContainer">
@@ -65,7 +64,7 @@ export default function WatchList(){
 
                         />
 
-                        {/* Unique button for each image to remove watchlist */}
+                        {/* Unique button for each image to remove from watchlist */}
                         <div
                             onClick={removeFromList}
                             key={vid.poster_path}

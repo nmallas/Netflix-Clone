@@ -65,7 +65,6 @@ export const deleteProfile = profileId => {
                 "XSRF-TOKEN": Cookies.get("XSRF-TOKEN")
             }
         });
-        console.log(res);
         if(res.ok) {
             dispatch(removeProfile(profileId))
         }

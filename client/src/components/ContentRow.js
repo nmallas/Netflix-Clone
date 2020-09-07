@@ -27,7 +27,6 @@ class ContentRow extends React.Component {
     addToList = e => {
         let path = e.target.dataset.poster;
         if(!path) return;
-        console.log(path, this.props.watchListId)
         this.props.addToWatchList(path, this.props.watchListId);
     }
 
@@ -91,7 +90,7 @@ class ContentRow extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    watchListId: state.profiles.current.watchListId
+    watchListId: state.profiles.current?.watchListId
 })
 
 const mapDispatchToProps = dispatch => ({

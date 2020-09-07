@@ -23,7 +23,6 @@ class FeatureImage extends React.Component {
         let res = await fetch(`/api/content/ctv`);
         if(res.ok) {
             let data = await res.json();
-            console.log(data);
             this.setState({vids: data});
             this.setImage()
         }
@@ -35,9 +34,14 @@ class FeatureImage extends React.Component {
 
     render() {
         let vid = this.state.currentVid;
-        return  (
+        return  !vid.overview ? <div id="feature-container"/> : (
             <div id="feature-container">
-                <h1 className="feature-title"> {vid.original_name} </h1>
+                <div className="feature-title">
+                    <h1 className="feature-title-text"> {vid.original_name} </h1>
+                    <h3 className="feature-details"> {vid.overview.length <= 150 ? vid.overview : (
+                        vid.overview.slice(0, 150 + vid.overview.slice(150).indexOf(" ")) + "...") }
+                    </h3>
+                </div>
                 {!vid?.backdrop_path ? "" :
                     <img
                         className="feature-image"
