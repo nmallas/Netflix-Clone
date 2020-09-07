@@ -2,8 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const WatchListContent = sequelize.define('WatchListContent', {
     watchListId: DataTypes.INTEGER,
-    contentId: DataTypes.INTEGER,
-    movie: DataTypes.BOOLEAN
+    poster_path: DataTypes.STRING
   }, {});
   WatchListContent.associate = function(models) {
     WatchListContent.belongsTo(models.WatchList, {

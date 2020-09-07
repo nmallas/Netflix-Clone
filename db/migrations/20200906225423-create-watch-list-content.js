@@ -10,15 +10,11 @@ module.exports = {
       },
       watchListId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull:false,
         references: {model: "WatchLists"}
       },
-      contentId: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      movie: {
-        type: Sequelize.BOOLEAN,
+      poster_path: {
+        type: Sequelize.STRING,
         allowNull: false
       },
       createdAt: {

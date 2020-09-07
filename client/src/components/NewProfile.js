@@ -10,13 +10,12 @@ export default function ProfileImage(props) {
     const dispatch = useDispatch();
     const userId = useSelector((state) => state.authentication.id);
 
-
     const showForm = (e) => {
         let form = document.getElementById("new-profile-form")
         form.classList.remove("hidden");
     }
 
-    function handleSubmit(e) {
+    const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(createProfile(name, imageNum, userId))
     }

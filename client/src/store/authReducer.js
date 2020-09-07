@@ -63,8 +63,6 @@ export function signUp({email, password, confirmPassword}) {
     }
 }
 
-window.login = login;
-
 export const logOut = () => {
     return async function(dispatch) {
         let res = await fetch("/api/session/logout", {

@@ -5,27 +5,43 @@ class FeatureImage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentVid: ''
+            currentVid: '',
+            vids: [],
+            cancelTimeout: ""
         }
     }
 
-    randomNum = length => Math.floor(Math.random() * length)
+    randomNum = length => Math.floor(Math.random() * length);
+
+    setImage = async() =>{
+        let randomIndex = this.randomNum(this.state.vids.length - 1);
+        let cancel = setTimeout(this.setImage, 12500)
+        this.setState({currentVid: this.state.vids[randomIndex], cancelTimeout: cancel});
+    }
 
     async componentDidMount() {
         let res = await fetch(`/api/content/ctv`);
         if(res.ok) {
             let data = await res.json();
-            console.log(data);
-            let randomIndex = this.randomNum(data.length - 1);
-            this.setState({currentVid: data[randomIndex]});
+            this.setState({vids: data});
+            this.setImage()
         }
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.state.cancelTimeout)
     }
 
     render() {
         let vid = this.state.currentVid;
-        return  (
+        return  !vid.overview ? <div id="feature-container"/> : (
             <div id="feature-container">
-                <h1 className="feature-title"> {vid.original_name} </h1>
+                <div className="feature-title">
+                    <h1 className="feature-title-text"> {vid.original_name} </h1>
+                    <h3 className="feature-details"> {vid.overview.length <= 150 ? vid.overview : (
+                        vid.overview.slice(0, 150 + vid.overview.slice(150).indexOf(" ")) + "...") }
+                    </h3>
+                </div>
                 {!vid?.backdrop_path ? "" :
                     <img
                         className="feature-image"

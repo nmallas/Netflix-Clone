@@ -23,7 +23,7 @@ function App() {
         if(profileRes.ok) {
           let profiles = await profileRes.json();
           setCurrentProfile(profiles.length ? profiles[0] : {});
-          setAllProfiles(profiles)
+          setAllProfiles(profiles);
         }
       setLoading(false);
     }
@@ -33,7 +33,8 @@ function App() {
 
   let store = configureStore({
     authentication: {id: userId, email: userEmail},
-    profiles: {current: currentProfile, all: allProfiles}
+    profiles: {current: currentProfile, all: allProfiles},
+    watchList: []
   });
 
 

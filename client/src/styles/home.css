@@ -1,9 +1,11 @@
 #header {
     position: fixed;
     width: 100%;
-    /* background-color: black; */
-    background-color: transparent;
     z-index: 5;
+}
+
+.hide {
+    background-color: transparent;
 }
 
 .scroll {
@@ -42,8 +44,6 @@
     min-width: 84px;
     margin: 1vh 2vw;
     border-radius: 2%;
-    /* background-color: white;
-    border:.3em solid rgba(0,0,0,.4); */
     display: flex;
     justify-self: center;
     transition: 0.4s;
@@ -114,9 +114,7 @@
 
 #profile-imput-webkit-autofill {
     box-shadow: 0 0 0 1000px #333333 inset !important;
-    /*use inset box-shadow to cover background-color*/
     -webkit-text-fill-color: white !important;
-    /*use text fill color to cover font color*/
     font-size: 16px !important;
 }
 
@@ -139,8 +137,6 @@
 }
 
 #new-profile-select {
-    /* background-color: rgb(229,9,22);
-    color: white; */
     font-size: 18px;
     width: 100%;
     margin: 10px;
@@ -185,7 +181,6 @@
     border: none;
     border-radius: 3px;
     padding: 2px;
-    /* padding: 5px; */
 }
 
 .delete-profile:hover {
@@ -208,9 +203,6 @@
     padding: 5px;
 }
 
-
-
-
 .hidden {
     display: none !important;
 }
@@ -226,7 +218,6 @@
     align-items: center;
     background-color: black;
     min-width: 130px;
-    /* padding: 10px; */
 }
 
 .modal-item {
@@ -266,16 +257,27 @@
     mask-image: linear-gradient(to top, transparent 11%, black 45%);
 
 }
-
 .feature-title {
-    color: white;
-    font-size: 40px;
     position: absolute;
     max-width: 30%;
     z-index: 4;
     top: 125px;
-    left: 50px;
-    background-color: rgba(0,0,0,.05);
+    left: 60px;
+    background-color: rgba(0,0,0,.0);
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.feature-title-text {
+    font-size: 42px;
+}
+
+.feature-details {
+    margin-top: 25px;
+    font-size: 18px;
+    font-weight: 200px;
+    background-color: rgba(0,0,0,.15);
 }
 
 .header-container {
@@ -303,27 +305,54 @@
     width: 185px;
     height: 53px;
     z-index: 20;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.75);
     border-radius: 5px;
 }
 
 .logo:hover {
-    background-color: rgba(0,0,0,.8);
+    background-color: rgba(0,0,0,1);
     cursor: pointer;
 }
 
 .content {
     margin: 0px 5px 0px 5px;
     object-fit: contain;
-    transition-duration: 0.6s;
     padding: 0;
 }
 
-.content:hover {
+.vid-container:hover {
     transform: scale(1.1, 1.15);
     padding: 0px;
     margin: 0px 12px;
     cursor: pointer;
+}
+
+.vid-container {
+    position: relative;
+    transition-duration: 0.6s;
+}
+
+.add-to-watchlist {
+    z-index: 7;
+    color: white;
+    height: 30px;
+    width: 30px;
+    margin: auto;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 30px;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    border-radius: 50%;
+}
+
+.add-to-watchlist:hover {
+    cursor: pointer;
+    color: black;
+    background-color: white;
 }
 
 
