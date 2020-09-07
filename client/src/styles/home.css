@@ -315,15 +315,42 @@
 .content {
     margin: 0px 5px 0px 5px;
     object-fit: contain;
-    transition-duration: 0.6s;
     padding: 0;
 }
 
-.content:hover {
+.vid-container:hover {
     transform: scale(1.1, 1.15);
     padding: 0px;
     margin: 0px 12px;
     cursor: pointer;
+}
+
+.vid-container {
+    position: relative;
+    transition-duration: 0.6s;
+}
+
+.add-to-watchlist {
+    z-index: 7;
+    color: white;
+    height: 30px;
+    width: 30px;
+    margin: auto;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 30px;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    border-radius: 50%;
+}
+
+.add-to-watchlist:hover {
+    cursor: pointer;
+    color: black;
+    background-color: white;
 }
 
 

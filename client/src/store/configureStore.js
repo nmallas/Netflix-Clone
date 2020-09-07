@@ -2,10 +2,12 @@ import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import authReducer from "./authReducer";
 import profileReducer from "./profileReducer"
+import watchListReducer from './watchlistReducer';
 
 const rootReducer = combineReducers({
     authentication: authReducer,
-    profiles: profileReducer
+    profiles: profileReducer,
+    watchList: watchListReducer
 });
 
 let storeEnhancer;

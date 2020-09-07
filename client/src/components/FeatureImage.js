@@ -23,6 +23,7 @@ class FeatureImage extends React.Component {
         let res = await fetch(`/api/content/ctv`);
         if(res.ok) {
             let data = await res.json();
+            console.log(data);
             this.setState({vids: data});
             this.setImage()
         }
