@@ -3,7 +3,6 @@ import { BrowserRouter} from 'react-router-dom';
 import { Provider } from "react-redux";
 import configureStore from "./store/configureStore";
 import MainContent from "./components/MainContent";
-import profile from './store/profileReducer';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -11,7 +10,6 @@ function App() {
   const [userEmail, setUserEmail] = useState("");
   const [currentProfile, setCurrentProfile] = useState(null);
   const [allProfiles, setAllProfiles] = useState([]);
-  const [watchList, setWatchList] = useState([])
 
   useEffect(() => {
     const loadUserData = async () => {
@@ -26,22 +24,7 @@ function App() {
           let profiles = await profileRes.json();
           setCurrentProfile(profiles.length ? profiles[0] : {});
           setAllProfiles(profiles);
-          if(profiles.length) {
-            let profileId = profiles[0].id
-            const watchListRes = await fetch(`api/watchlists/${profileId}`);
-            if(watchListRes.ok) {
-              let currentWatchList = await watchListRes.json();
-              setWatchList(currentWatchList);
-            }
-          }
-      }
-      // wasn't working
-      // maybe use selector on home page
-      // const watchListRes = await fetch(`api/watchlists/${currentProfile}`);
-      //   if(watchListRes.ok) {
-      //     let currentWatchList = await watchListRes.json();
-      //     setWatchList(currentWatchList);
-      //   }
+        }
       setLoading(false);
     }
     loadUserData();
@@ -51,7 +34,7 @@ function App() {
   let store = configureStore({
     authentication: {id: userId, email: userEmail},
     profiles: {current: currentProfile, all: allProfiles},
-    watchList
+    watchList: []
   });
 
 

@@ -5,7 +5,6 @@ import FeatureImage from "./FeatureImage";
 import WatchList from "./WatchList";
 
 const categories = {
-    'Top Rated': `tr`,
     'Popular on NickFlix': `pn`,
     'Comedy TV Shows': `ctv`,
     'Horror Movies': `hm`,
@@ -20,12 +19,15 @@ const Home = () => {
         <div>
             <Header/>
             <FeatureImage/>
+            <ContentRow category={'Top Rated'} route={'tr'}/>
             <WatchList/>
             {Object.entries(categories).map(category =>
                 <ContentRow
                     category={category[0]}
                     route={category[1]}
-                    key={category[1]}/>)}
+                    key={category[1]}
+                />)
+            }
         </div>
     );
 }

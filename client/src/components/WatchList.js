@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setList } from "../store/watchlistReducer";
+import { setList, watchListDelete } from "../store/watchlistReducer";
 
 
 export default function WatchList(){
@@ -20,6 +20,28 @@ export default function WatchList(){
           getWatchlist(watchListId)
     }, [watchListId, dispatch]);
 
+    const showButton = e => {
+        let id = e.target.dataset.poster + "wl";
+        if(!id) return;
+        let button = document.getElementById(id);
+        button.classList.remove("hidden");
+    }
+
+    const hideButton = e => {
+        let id = e.target.dataset.poster + "wl";
+        if(!id) return;
+        let button = document.getElementById(id);
+        button.classList.add("hidden");
+    }
+
+    const removeFromList = e => {
+        let contentId = e.target.dataset.id;
+        if(!contentId) return;
+        console.log(contentId, watchListId)
+        dispatch(watchListDelete(contentId, watchListId));
+    }
+
+
     return !watchlist.length ? null : (
         <div className="rowContainer">
             <h4 className="category-title"> My WatchList </h4>
@@ -29,8 +51,8 @@ export default function WatchList(){
                     (!vid.poster_path) ? "" :
                     // Container for each image, given html data to identify in DOM
                     <div className="vid-container"
-                        // onMouseEnter={this.showButton}
-                        // onMouseLeave={this.hideButton}
+                        onMouseEnter={showButton}
+                        onMouseLeave={hideButton}
                         data-poster={vid.poster_path}
                         key={`${vid.id}a`}>
 
@@ -43,14 +65,15 @@ export default function WatchList(){
 
                         />
 
-                        {/* Unique button for each image to add to watchlist */}
+                        {/* Unique button for each image to remove watchlist */}
                         <div
-                            // onClick={this.addToList}
+                            onClick={removeFromList}
                             key={vid.poster_path}
                             data-poster={vid.poster_path}
+                            data-id={vid.id}
                             className="add-to-watchlist hidden"
                             id={`${vid.poster_path}wl`}>
-                        + </div>
+                        x </div>
 
                     </div>
                     ))

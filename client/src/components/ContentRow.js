@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { watchListAdd } from "../store/watchlistReducer"
 
 
-
 class ContentRow extends React.Component {
     constructor(props) {
         super(props);

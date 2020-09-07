@@ -36,3 +36,21 @@ export const watchListAdd = (path, watchlistId) => {
         }
     }
 }
+
+export const watchListDelete = (contentId, watchListId) => {
+    return async (dispatch) => {
+        let res = await fetch(`/api/watchlists/${contentId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "XSRF-TOKEN": Cookies.get("XSRF-TOKEN")
+            },
+            body: JSON.stringify({watchListId})
+        })
+        if(res.ok) {
+            let watchListContent = await res.json();
+            console.log(watchListContent);
+            dispatch(setList(watchListContent))
+        }
+    }
+}
