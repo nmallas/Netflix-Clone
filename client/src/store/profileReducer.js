@@ -16,8 +16,7 @@ export default function profile(state= {current: {}, all:[]}, action) {
             let filtered = state.all.filter(prof => prof.id !== action.id);
             return filtered.length ? {current: filtered[0], all: filtered} : {current: {}, all:[]};
         case SET_ALL_PROFILES:
-           let obj = { current: action.current, all: action.all }
-           return obj;
+           return { current: action.current, all: action.all };
         default:
             return state;
     }

@@ -41,8 +41,9 @@ export function login({email, password}) {
         if(res.ok) {
             let currentUser = await res.json();
             dispatch(setUser(currentUser.user.id, currentUser.user.email));
-            const profileRes = await fetch(`/api/profiles/${currentUser.user.id}`);
+
             // update profile slice of store after each login
+            const profileRes = await fetch(`/api/profiles/${currentUser.user.id}`);
             if(profileRes.ok) {
                 let profiles = await profileRes.json();
                 let obj = {all: profiles, current: (profiles.length ? profiles[0] : {})}
@@ -67,6 +68,14 @@ export function signUp({email, password, confirmPassword}) {
         if(res.ok) {
             let currentUser = await res.json();
             dispatch(setUser(currentUser.user.id, currentUser.user.email))
+
+            // update profile slice of store after each sign-up
+            const profileRes = await fetch(`/api/profiles/${currentUser.user.id}`);
+            if(profileRes.ok) {
+                let profiles = await profileRes.json();
+                let obj = {all: profiles, current: (profiles.length ? profiles[0] : {})}
+                dispatch(setAllProfiles(obj));
+            }
         }
     }
 }
