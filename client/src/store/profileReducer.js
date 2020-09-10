@@ -1,10 +1,10 @@
 import Cookies from "js-cookie";
 
 
-
 const CREATE_PROFILE = "profile/create";
 const SET_PROFILE = "profile/setCurrent";
 const REMOVE_PROFILE = "profile/remove";
+const SET_ALL_PROFILES = "profile/set/all"
 
 export default function profile(state= {current: {}, all:[]}, action) {
     switch(action.type) {
@@ -15,6 +15,9 @@ export default function profile(state= {current: {}, all:[]}, action) {
         case REMOVE_PROFILE:
             let filtered = state.all.filter(prof => prof.id !== action.id);
             return filtered.length ? {current: filtered[0], all: filtered} : {current: {}, all:[]};
+        case SET_ALL_PROFILES:
+           let obj = { current: action.current, all: action.all }
+           return obj;
         default:
             return state;
     }
@@ -33,6 +36,11 @@ export const setProfile = (id) => ({
 const removeProfile = (id) => ({
     type: REMOVE_PROFILE,
     id
+})
+
+export const setAllProfiles = ({current, all}) => ({
+    type: SET_ALL_PROFILES,
+    current, all
 })
 
 export const createProfile = (name, imageLink, userId) => {

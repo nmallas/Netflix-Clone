@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import {setAllProfiles} from "./profileReducer";
 
 const LOGIN = "auth/login";
 const LOGOUT = "auth/logout";
@@ -40,6 +41,13 @@ export function login({email, password}) {
         if(res.ok) {
             let currentUser = await res.json();
             dispatch(setUser(currentUser.user.id, currentUser.user.email));
+            const profileRes = await fetch(`/api/profiles/${currentUser.user.id}`);
+            // update profile slice of store after each login
+            if(profileRes.ok) {
+                let profiles = await profileRes.json();
+                let obj = {all: profiles, current: (profiles.length ? profiles[0] : {})}
+                dispatch(setAllProfiles(obj));
+            }
             return res;
         }
     }
