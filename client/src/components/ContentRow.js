@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/home.css";
 import fetch from "node-fetch";
 import { connect } from "react-redux";
-import { watchListAdd } from "../store/watchlistReducer"
+import { watchListAdd, watchListDelete } from "../store/watchlistReducer"
 
 
 class ContentRow extends React.Component {
@@ -24,28 +24,29 @@ class ContentRow extends React.Component {
         return;
     }
 
-    addToList = e => {
-        let path = e.target.dataset.poster;
+    addToList = path => {
         if(!path) return;
         this.props.addToWatchList(path, this.props.watchListId);
     }
 
-    showButton(e) {
-        let id = e.target.dataset.poster;
-        if(!id) return;
+    removeFromList = path => {
+        if(!path) return;
+        this.props.removeFromList(path, this.props.watchListId);
+    }
+
+    showButton(id) {
         let button = document.getElementById(id);
         button.classList.remove("hidden");
     }
 
-    hideButton(e) {
-        let id = e.target.dataset.poster;
-        if(!id) return;
+    hideButton(id) {
         let button = document.getElementById(id);
         button.classList.add("hidden");
     }
 
-    render() {
 
+    render() {
+        console.log(this.props.wlPaths)
         const topRated = (this.state.category === "Top Rated");
 
         return this.state.loading ? null : (
@@ -55,11 +56,11 @@ class ContentRow extends React.Component {
                     {this.state.content.map(vid => (
                         // Removes faulty data
                         (!vid.poster_path || !vid.backdrop_path) ? "" :
-                        // Container for each image, given html data to identify in DOM
+                        // Container for each image
                         <div className="vid-container"
-                            onMouseEnter={this.showButton}
-                            onMouseLeave={this.hideButton}
-                            data-poster={vid.poster_path}
+                            onMouseEnter={() => this.showButton(`${vid.id}${this.props.route}`)}
+                            onMouseLeave={() => this.hideButton(`${vid.id}${this.props.route}`)}
+                            // unique key for each vid
                             key={`${vid.id}${this.props.route}`}>
 
                             <img className="content"
@@ -72,13 +73,29 @@ class ContentRow extends React.Component {
                             />
 
                             {/* Unique button for each image to add to watchlist */}
+                            {/* If poster not in watchlist, button to add, else button to remove */}
+                            { !this.props.wlPaths?.includes(vid.poster_path) ?
+
                             <div
-                                onClick={this.addToList}
+                                onClick={() => this.addToList(vid.poster_path)}
                                 key={vid.poster_path}
-                                data-poster={vid.poster_path}
                                 className="add-to-watchlist hidden"
-                                id={vid.poster_path}>
-                            + </div>
+                                id={`${vid.id}${this.props.route}`}
+                            >
+                            +
+                            </div>
+
+                            :
+
+                            <div
+                                onClick={() => this.removeFromList(vid.id)}
+                                key={vid.poster_path}
+                                className="add-to-watchlist hidden"
+                                id={`${vid.id}${this.props.route}`}
+                            >
+                            x
+                            </div>
+                        }
 
                         </div>
                         ))
@@ -90,11 +107,12 @@ class ContentRow extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    watchListId: state.profiles.current?.watchListId
+    watchListId: state.profiles.current?.watchListId,
 })
 
 const mapDispatchToProps = dispatch => ({
-    addToWatchList: (path, watchListId) => dispatch(watchListAdd(path, watchListId))
+    addToWatchList: (path, watchListId) => dispatch(watchListAdd(path, watchListId)),
+    removeFromList: (path, watchListId) => dispatch(watchListDelete(path, watchListId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContentRow);
