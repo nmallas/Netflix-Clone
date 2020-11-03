@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/home.css";
 import fetch from "node-fetch";
 import { connect } from "react-redux";
-import { watchListAdd, watchListDelete } from "../store/watchlistReducer"
+import { watchListAdd } from "../store/watchlistReducer"
 
 
 class ContentRow extends React.Component {
@@ -26,27 +26,27 @@ class ContentRow extends React.Component {
 
     addToList = path => {
         if(!path) return;
+        console.log(path);
         this.props.addToWatchList(path, this.props.watchListId);
     }
 
-    removeFromList = path => {
-        if(!path) return;
-        this.props.removeFromList(path, this.props.watchListId);
-    }
-
-    showButton(id) {
+    showButton(id, pp) {
         let button = document.getElementById(id);
+        console.log(pp);
+        if(!button) return;
         button.classList.remove("hidden");
     }
 
     hideButton(id) {
         let button = document.getElementById(id);
+        if(!button) return;
         button.classList.add("hidden");
     }
 
 
+
     render() {
-        console.log(this.props.wlPaths)
+        console.log(this.props.wlPaths);
         const topRated = (this.state.category === "Top Rated");
 
         return this.state.loading ? null : (
@@ -58,7 +58,7 @@ class ContentRow extends React.Component {
                         (!vid.poster_path || !vid.backdrop_path) ? "" :
                         // Container for each image
                         <div className="vid-container"
-                            onMouseEnter={() => this.showButton(`${vid.id}${this.props.route}`)}
+                            onMouseEnter={() => this.showButton(`${vid.id}${this.props.route}`, vid.poster_path)}
                             onMouseLeave={() => this.hideButton(`${vid.id}${this.props.route}`)}
                             // unique key for each vid
                             key={`${vid.id}${this.props.route}`}>
@@ -73,8 +73,9 @@ class ContentRow extends React.Component {
                             />
 
                             {/* Unique button for each image to add to watchlist */}
-                            {/* If poster not in watchlist, button to add, else button to remove */}
-                            { !this.props.wlPaths?.includes(vid.poster_path) ?
+                            {/* Only render button if content is not already in watchlist */}
+                            {
+                            !this.props.wlPaths?.includes(vid.poster_path) ?
 
                             <div
                                 onClick={() => this.addToList(vid.poster_path)}
@@ -86,15 +87,7 @@ class ContentRow extends React.Component {
                             </div>
 
                             :
-
-                            <div
-                                onClick={() => this.removeFromList(vid.id)}
-                                key={vid.poster_path}
-                                className="add-to-watchlist hidden"
-                                id={`${vid.id}${this.props.route}`}
-                            >
-                            x
-                            </div>
+                            ""
                         }
 
                         </div>
@@ -112,7 +105,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
     addToWatchList: (path, watchListId) => dispatch(watchListAdd(path, watchListId)),
-    removeFromList: (path, watchListId) => dispatch(watchListDelete(path, watchListId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContentRow);

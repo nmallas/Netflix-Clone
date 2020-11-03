@@ -27,6 +27,7 @@ const Home = () => {
             <WatchList/>
             {Object.entries(categories).map(category =>
                 <ContentRow
+                    wlPaths={watchListPaths}
                     category={category[0]}
                     route={category[1]}
                     key={category[1]}
