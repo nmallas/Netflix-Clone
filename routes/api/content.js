@@ -7,7 +7,7 @@ const router = express.Router();
 const apiKey = process.env.API_KEY;
 
 const routeMatch = {
-    'tr': `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=2&region=us`,
+    'tr': `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=4&region=US`,
     'pn': `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`,
     'ctv': `https://api.themoviedb.org/3/discover/tv?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&page=1&with_genres=35&with_original_language=en`,
     'hm': `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=27`,

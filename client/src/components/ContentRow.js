@@ -2,7 +2,9 @@ import React from "react";
 import "../styles/home.css";
 import fetch from "node-fetch";
 import { connect } from "react-redux";
-import { watchListAdd } from "../store/watchlistReducer"
+import { watchListAdd } from "../store/watchlistReducer";
+import YouTube from 'react-youtube';
+import movieTrailer from "movie-trailer";
 
 
 class ContentRow extends React.Component {
@@ -11,7 +13,8 @@ class ContentRow extends React.Component {
         this.state = {
             loading: true,
             content: [],
-            category: this.props.category
+            category: this.props.category,
+            showTrailer: false
         }
     }
 
@@ -24,29 +27,46 @@ class ContentRow extends React.Component {
         return;
     }
 
-    addToList = e => {
-        let path = e.target.dataset.poster;
+    addToList = path => {
         if(!path) return;
         this.props.addToWatchList(path, this.props.watchListId);
     }
 
-    showButton(e) {
-        let id = e.target.dataset.poster;
-        if(!id) return;
+    showButton(id, pp) {
         let button = document.getElementById(id);
+        if(!button) return;
         button.classList.remove("hidden");
     }
 
-    hideButton(e) {
-        let id = e.target.dataset.poster;
-        if(!id) return;
+    hideButton(id) {
         let button = document.getElementById(id);
+        if(!button) return;
         button.classList.add("hidden");
     }
 
-    render() {
+    showTrailer(e, vid) {
 
-        const topRated = (this.state.category === "Top Rated");
+        // Don't show trailer on add to watchlist button click
+        if(e.target.classList[0] === "add-to-watchlist") return;
+
+        let name = vid.title || vid.orignal_name || vid.original_title;
+        movieTrailer( name, {id: true, multi: false} )
+            .then( res => {
+                if(this.state.showTrailer === res) {
+                    // If trailer already showing, close trailer on second click
+                    this.setState({showTrailer: false});
+                    return;
+                }
+                this.setState({showTrailer: res})}
+            )
+
+
+    }
+
+
+
+    render() {
+        const popular = (this.state.category === "Popular on NickFlix");
 
         return this.state.loading ? null : (
             <div className="rowContainer">
@@ -55,46 +75,57 @@ class ContentRow extends React.Component {
                     {this.state.content.map(vid => (
                         // Removes faulty data
                         (!vid.poster_path || !vid.backdrop_path) ? "" :
-                        // Container for each image, given html data to identify in DOM
+                        // Container for each image
                         <div className="vid-container"
-                            onMouseEnter={this.showButton}
-                            onMouseLeave={this.hideButton}
-                            data-poster={vid.poster_path}
+                            onMouseEnter={() => this.showButton(`${vid.id}${this.props.route}`, vid.poster_path)}
+                            onMouseLeave={() => this.hideButton(`${vid.id}${this.props.route}`)}
+                            onClick={(e) => this.showTrailer(e, vid)}
+                            // unique key for each vid
                             key={`${vid.id}${this.props.route}`}>
 
                             <img className="content"
                                 key={`${this.props.route}${vid.id}`}
-                                src={`https://image.tmdb.org/t/p/original/${topRated ? vid.poster_path : vid.backdrop_path}`}
+                                src={`https://image.tmdb.org/t/p/original/${popular ? vid.poster_path : vid.backdrop_path}`}
                                 alt={vid.orignal_name}
                                 data-poster={vid.poster_path}
-                                height={topRated ? "220px" : "125px"}
+                                height={popular ? "220px" : "125px"}
 
                             />
 
                             {/* Unique button for each image to add to watchlist */}
+                            {/* Only render button if content is not already in watchlist */}
+                            {
+                            !this.props.wlPaths?.includes(vid.poster_path) ?
+
                             <div
-                                onClick={this.addToList}
+                                onClick={() => this.addToList(vid.poster_path)}
                                 key={vid.poster_path}
-                                data-poster={vid.poster_path}
                                 className="add-to-watchlist hidden"
-                                id={vid.poster_path}>
-                            + </div>
+                                id={`${vid.id}${this.props.route}`}
+                            >
+                            +
+                            </div>
+
+                            :
+                            ""
+                        }
 
                         </div>
                         ))
                     }
                 </div>
+                { this.state.showTrailer && <YouTube videoId={this.state.showTrailer} opts={{width: "100%", margin: "20px"}} hidden containerClassName="trailer"/>}
             </div>
         )
     };
 }
 
 const mapStateToProps = (state) => ({
-    watchListId: state.profiles.current?.watchListId
+    watchListId: state.profiles.current?.watchListId,
 })
 
 const mapDispatchToProps = dispatch => ({
-    addToWatchList: (path, watchListId) => dispatch(watchListAdd(path, watchListId))
+    addToWatchList: (path, watchListId) => dispatch(watchListAdd(path, watchListId)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContentRow);
