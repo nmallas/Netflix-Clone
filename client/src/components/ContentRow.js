@@ -2,7 +2,9 @@ import React from "react";
 import "../styles/home.css";
 import fetch from "node-fetch";
 import { connect } from "react-redux";
-import { watchListAdd } from "../store/watchlistReducer"
+import { watchListAdd } from "../store/watchlistReducer";
+import YouTube from 'react-youtube';
+import movieTrailer from "movie-trailer";
 
 
 class ContentRow extends React.Component {
@@ -11,7 +13,8 @@ class ContentRow extends React.Component {
         this.state = {
             loading: true,
             content: [],
-            category: this.props.category
+            category: this.props.category,
+            showTrailer: false
         }
     }
 
@@ -26,13 +29,11 @@ class ContentRow extends React.Component {
 
     addToList = path => {
         if(!path) return;
-        console.log(path);
         this.props.addToWatchList(path, this.props.watchListId);
     }
 
     showButton(id, pp) {
         let button = document.getElementById(id);
-        console.log(pp);
         if(!button) return;
         button.classList.remove("hidden");
     }
@@ -43,11 +44,29 @@ class ContentRow extends React.Component {
         button.classList.add("hidden");
     }
 
+    showTrailer(e, vid) {
+
+        // Don't show trailer on add to watchlist button click
+        if(e.target.classList[0] === "add-to-watchlist") return;
+
+        let name = vid.title || vid.orignal_name || vid.original_title;
+        movieTrailer( name, {id: true, multi: false} )
+            .then( res => {
+                if(this.state.showTrailer === res) {
+                    // If trailer already showing, close trailer on second click
+                    this.setState({showTrailer: false});
+                    return;
+                }
+                this.setState({showTrailer: res})}
+            )
+
+
+    }
+
 
 
     render() {
-        console.log(this.props.wlPaths);
-        const topRated = (this.state.category === "Top Rated");
+        const popular = (this.state.category === "Popular on NickFlix");
 
         return this.state.loading ? null : (
             <div className="rowContainer">
@@ -60,15 +79,16 @@ class ContentRow extends React.Component {
                         <div className="vid-container"
                             onMouseEnter={() => this.showButton(`${vid.id}${this.props.route}`, vid.poster_path)}
                             onMouseLeave={() => this.hideButton(`${vid.id}${this.props.route}`)}
+                            onClick={(e) => this.showTrailer(e, vid)}
                             // unique key for each vid
                             key={`${vid.id}${this.props.route}`}>
 
                             <img className="content"
                                 key={`${this.props.route}${vid.id}`}
-                                src={`https://image.tmdb.org/t/p/original/${topRated ? vid.poster_path : vid.backdrop_path}`}
+                                src={`https://image.tmdb.org/t/p/original/${popular ? vid.poster_path : vid.backdrop_path}`}
                                 alt={vid.orignal_name}
                                 data-poster={vid.poster_path}
-                                height={topRated ? "220px" : "125px"}
+                                height={popular ? "220px" : "125px"}
 
                             />
 
@@ -94,6 +114,7 @@ class ContentRow extends React.Component {
                         ))
                     }
                 </div>
+                { this.state.showTrailer && <YouTube videoId={this.state.showTrailer} opts={{width: "100%", margin: "20px"}} hidden containerClassName="trailer"/>}
             </div>
         )
     };

@@ -6,7 +6,7 @@ import WatchList from "./WatchList";
 import { useSelector } from "react-redux";
 
 const categories = {
-    'Popular on NickFlix': `pn`,
+    'Top Rated': `tr`,
     'Comedy TV Shows': `ctv`,
     'Horror Movies': `hm`,
     'Action Movies': `am`,
@@ -23,7 +23,7 @@ const Home = () => {
         <div>
             <Header/>
             <FeatureImage/>
-            <ContentRow category={'Top Rated'} route={'tr'} wlPaths={watchListPaths}/>
+            <ContentRow category={'Popular on NickFlix'} route={'pn'} wlPaths={watchListPaths}/>
             <WatchList/>
             {Object.entries(categories).map(category =>
                 <ContentRow
