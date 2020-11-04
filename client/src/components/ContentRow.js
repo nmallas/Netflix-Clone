@@ -44,12 +44,30 @@ class ContentRow extends React.Component {
         button.classList.add("hidden");
     }
 
-    showTrailer(e, vid) {
+    async showTrailer (e, vid) {
 
         // Don't show trailer on add to watchlist button click
         if(e.target.classList[0] === "add-to-watchlist") return;
 
-        let name = vid.title || vid.orignal_name || vid.original_title;
+        let name = vid.title || vid.name || vid.orignal_name || vid.original_title;
+
+        let tvCategories =  [
+            'Comedy TV Shows',
+            'Drama TV',
+            'Scifi TV Shows',
+        ]
+
+        // if tv show fetch tv trailer from api
+        if(tvCategories.includes(this.state.category)) {
+            let res = await fetch(`/api/tvtrailer/${vid.id}`);
+            if(res.ok) {
+                let data = await res.json();
+                let videoKey = data[0]?.key || false;
+                this.setState({showTrailer: videoKey});
+            }
+            return;
+        }
+
         movieTrailer( name, {id: true, multi: false} )
             .then( res => {
                 if(this.state.showTrailer === res) {
