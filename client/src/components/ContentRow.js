@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { watchListAdd } from "../store/watchlistReducer";
 import YouTube from 'react-youtube';
 import movieTrailer from "movie-trailer";
+import trailer, { addTrailer } from "../store/trailerReducer";
 
 
 class ContentRow extends React.Component {
@@ -13,8 +14,7 @@ class ContentRow extends React.Component {
         this.state = {
             loading: true,
             content: [],
-            category: this.props.category,
-            showTrailer: false
+            category: this.props.category
         }
     }
 
@@ -44,6 +44,8 @@ class ContentRow extends React.Component {
         button.classList.add("hidden");
     }
 
+
+
     async showTrailer (e, vid) {
 
         // Don't show trailer on add to watchlist button click
@@ -63,19 +65,19 @@ class ContentRow extends React.Component {
             if(res.ok) {
                 let data = await res.json();
                 let videoKey = data[0]?.key || false;
-                this.setState({showTrailer: videoKey});
+                this.props.addTrailer(videoKey, this.props.route)
             }
             return;
         }
 
         movieTrailer( name, {id: true, multi: false} )
             .then( res => {
-                if(this.state.showTrailer === res) {
-                    // If trailer already showing, close trailer on second click
+                // If trailer already showing, close trailer on second click
+                if(this.props?.trailer?.path === res) {
                     this.setState({showTrailer: false});
                     return;
                 }
-                this.setState({showTrailer: res})}
+                this.props.addTrailer(res, this.props.route)}
             )
 
 
@@ -132,7 +134,11 @@ class ContentRow extends React.Component {
                         ))
                     }
                 </div>
-                { this.state.showTrailer && <YouTube videoId={this.state.showTrailer} opts={{width: "100%", margin: "20px"}} hidden containerClassName="trailer"/>}
+
+                {
+                // Ensure trailer category in redux store is the same as route to prevent multiple trailers at once
+                (this.props.trailer?.category === this.props.route)  && <YouTube videoId={this.props.trailer.path} opts={{width: "100%", margin: "20px"}} hidden containerClassName="trailer"/>
+                }
             </div>
         )
     };
@@ -140,10 +146,12 @@ class ContentRow extends React.Component {
 
 const mapStateToProps = (state) => ({
     watchListId: state.profiles.current?.watchListId,
+    trailer: state.trailer
 })
 
 const mapDispatchToProps = dispatch => ({
     addToWatchList: (path, watchListId) => dispatch(watchListAdd(path, watchListId)),
+    addTrailer: (trailer, category) => dispatch(addTrailer(trailer, category))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContentRow);

@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import authReducer from "./authReducer";
 import profileReducer from "./profileReducer"
 import watchListReducer from './watchlistReducer';
+import trailerReducer from "./trailerReducer";
 
 const rootReducer = combineReducers({
     authentication: authReducer,
     profiles: profileReducer,
-    watchList: watchListReducer
+    watchList: watchListReducer,
+    trailer: trailerReducer
 });
 
 let storeEnhancer;

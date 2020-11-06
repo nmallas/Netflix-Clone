@@ -17,7 +17,9 @@ const categories = {
 
 const Home = () => {
 
+
     const watchListPaths = useSelector((state) => state.watchList?.map(vid => vid.poster_path));
+
 
     return (
         <div>

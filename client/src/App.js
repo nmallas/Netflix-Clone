@@ -34,7 +34,8 @@ function App() {
   let store = configureStore({
     authentication: {id: userId, email: userEmail},
     profiles: {current: currentProfile, all: allProfiles},
-    watchList: []
+    watchList: [],
+    trailer: {path: "", category: ""}
   });
 
 
