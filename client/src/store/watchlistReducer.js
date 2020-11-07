@@ -37,7 +37,6 @@ export const watchListAdd = (path, watchlistId) => {
 }
 
 export const watchListDelete = (contentId, watchListId) => {
-    console.log(contentId, watchListId);
     return async (dispatch) => {
         let res = await fetch(`/api/watchlists/${contentId}`, {
             method: "DELETE",

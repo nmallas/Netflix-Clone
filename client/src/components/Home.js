@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ContentRow from "./ContentRow";
 import Header from "./Header";
 import FeatureImage from "./FeatureImage";
 import WatchList from "./WatchList";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { removeTrailer } from "../store/trailerReducer";
 
 const categories = {
     'Top Rated': `tr`,
@@ -17,7 +18,19 @@ const categories = {
 
 const Home = () => {
 
+
     const watchListPaths = useSelector((state) => state.watchList?.map(vid => vid.poster_path));
+    const dispatch = useDispatch();
+
+    useEffect(()=> {
+        document.body.addEventListener("click", e => {
+            // If click is anywhere besides movie content, close open trailers
+            if(!(e.target.classList[0] === "content")) {
+                dispatch(removeTrailer())
+            }
+        })
+    }, [])
+
 
     return (
         <div>
