@@ -12,7 +12,6 @@ router.get("/:id", asyncHandler(async function (req, res) {
     let response = await fetch(`https://api.themoviedb.org/3/tv/${id}/videos?api_key=${apiKey}&language=en-US`);
     if(response.ok) {
         let data = await response.json();
-        console.log(data);
         res.json(data.results);
         return;
     }

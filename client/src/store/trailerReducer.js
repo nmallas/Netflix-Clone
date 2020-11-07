@@ -13,7 +13,6 @@ export default function trailer(state={path: "", category: ""}, action) {
 }
 
 export const addTrailer = (trailer, category) => {
-    console.log(2);
     return {
         type: ADDTRAILER,
         trailer,

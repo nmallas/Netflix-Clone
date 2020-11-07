@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { watchListAdd } from "../store/watchlistReducer";
 import YouTube from 'react-youtube';
 import movieTrailer from "movie-trailer";
-import trailer, { addTrailer } from "../store/trailerReducer";
+import { addTrailer, removeTrailer } from "../store/trailerReducer";
 
 
 class ContentRow extends React.Component {
@@ -65,7 +65,13 @@ class ContentRow extends React.Component {
             if(res.ok) {
                 let data = await res.json();
                 let videoKey = data[0]?.key || false;
-                this.props.addTrailer(videoKey, this.props.route)
+                // If trailer already showing, close trailer on second click
+                if(this.props?.trailer?.path === videoKey) {
+                    this.props.trailerRemove()
+                    return;
+                }
+
+                this.props.trailerAdd(videoKey, this.props.route)
             }
             return;
         }
@@ -74,10 +80,10 @@ class ContentRow extends React.Component {
             .then( res => {
                 // If trailer already showing, close trailer on second click
                 if(this.props?.trailer?.path === res) {
-                    this.setState({showTrailer: false});
+                    this.props.trailerRemove()
                     return;
                 }
-                this.props.addTrailer(res, this.props.route)}
+                this.props.trailerAdd(res, this.props.route)}
             )
 
 
@@ -137,7 +143,7 @@ class ContentRow extends React.Component {
 
                 {
                 // Ensure trailer category in redux store is the same as route to prevent multiple trailers at once
-                (this.props.trailer?.category === this.props.route)  && <YouTube videoId={this.props.trailer.path} opts={{width: "100%", margin: "20px"}} hidden containerClassName="trailer"/>
+                (this.props.trailer?.category === this.props.route)  && <YouTube videoId={this.props.trailer.path} opts={{width: "100%", margin: "20px", playerVars: {autoplay: 1}}} hidden containerClassName="trailer"/>
                 }
             </div>
         )
@@ -151,7 +157,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => ({
     addToWatchList: (path, watchListId) => dispatch(watchListAdd(path, watchListId)),
-    addTrailer: (trailer, category) => dispatch(addTrailer(trailer, category))
+    trailerAdd: (trailer, category) => dispatch(addTrailer(trailer, category)),
+    trailerRemove: () => dispatch(removeTrailer())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContentRow);
