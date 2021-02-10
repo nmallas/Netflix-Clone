@@ -8,18 +8,18 @@ This project is currently hosted on Heroku!  [NickFlixApp](https://nickflixapp.h
 
 ## MVP Feature List:
 
-### Feature 1: User Authentication (_Estimated time:_ 2 days - 8/31 - 9/01)
+### Feature 1: User Authentication
 * Users can create an account in order to access the main content of the site.
 * Users can login/logout and persist their sessions across different pages and page reloads.
 * Users can update their personal details on the account page.
 * There is a demo user available in order to provide easy access to exploring full site functionality.
 
-### Feature 2: Home Page (_Estimated time:_ 2 days - 9/02 - 9/03)
+### Feature 2: Home Page
 * Logged in users can view a collection of movies/shows sorted by categories (i.e. Trending, Most Popular).
 * Content is generated dynamically by fetching data from a third-party api.
-* Users can click on a title to view more information about it.
+* Users can click on a title to view a trailer.
 
-### Feature 3: Profiles & Watchlists (_Estimated time:_ 1 days - 9/04 - 9/04)
+### Feature 3: Profiles & Watchlists
 * Each user can create multiple profiles.
 * Each profile can set a custom name and select an image from a list of profile images.
 * Each profile can add or remove videos from their watchlist to view them at a later date.
@@ -30,6 +30,12 @@ This project is currently hosted on Heroku!  [NickFlixApp](https://nickflixapp.h
 ### Bonus Feature (Time-permitting): Search
 * Users can search for a specific category or title and be given a list of related content.
 
+</br>
+
+## Application Architecture:
+<img src="./client/src/images/NickFlix-Architecture.png">
+
+<br></br>
 
 ## Database Schema:
 <img src="./client/src/images/Database-Schema.png"/>
@@ -92,7 +98,30 @@ Current sample state:
               }]},
 ```
 ```
-watchlist: {id: 47}
+watchlist: [{
+      id: 98,
+      watchListId: 47,
+      poster_path: '/qcr9bBY6MVeLzriKCmJOv1562uY.jpg',
+      createdAt: '2020-09-07T20:55:17.082Z',
+      updatedAt: '2020-09-07T20:55:17.082Z'
+    },
+    {
+      id: 114,
+      watchListId: 47,
+      poster_path: '/1QpO9wo7JWecZ4NiBuu625FiY1j.jpg',
+      createdAt: '2020-11-02T19:12:51.682Z',
+      updatedAt: '2020-11-02T19:12:51.682Z'
+    },
+    {
+      id: 140,
+      watchListId: 47,
+      poster_path: '/eWivEg4ugIMAd7d4uWI37b17Cgj.jpg',
+      createdAt: '2020-11-03T22:19:50.731Z',
+      updatedAt: '2020-11-03T22:19:50.731Z'
+    }],
+```
+```
+trailer: {path: "sfM7_JLk-84", category: "pn"}
 ```
 }`
 
