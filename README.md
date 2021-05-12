@@ -40,24 +40,29 @@ This project is currently hosted on Heroku!  [NickFlixApp](https://nickflixapp.h
 ## Database Schema:
 <img src="./client/src/images/Database-Schema.png"/>
 
+<br></br>
 
-## RESTful EndPoints In Express:
+## Backend Routes:
 
-| Method         | Path                     | Purpose              |
-|---             |---                       |---                   |
-| Get            | /                        |  Home Page           |
-| Get            | /users/create            |  Sign-Up Form        |
-| Get            | /users/login             |  User Login Form     |
-| Post           | /users                   |  Create User Account |
-| Post           | /users/login             |  Authenticate User   |
-| Get            | /users/:id               |  Access User Account |
-| Get            | /users/:id/update        |  Form to Update Account Details |
-| Put            | /users/:id/update        |  Update Account Details |
-| Delete         | /users/:id               |  Delete User Account |
-| Get            | /users/:id/profiles      |  View a list of profiles |
-| Post           | /users/:id/profiles/:pId |  Create a new profile|
-| Delete         | /users/:id/profiles/:pId |  Delete a profile |
-| Post           | /profiles/:pId/watchlist |  Create a watchlist|
+
+| Method         | Path                     | Purpose                    |
+|---             |---                       |---                         |
+| POST           | /api/users               |  Create User               |
+| POST           | /api/session             |  Login User                |
+| GET            | /api/session             |  Get Current User          |
+| DELETE         | /api/session             |  Logout User               |
+| GET            | /api/content/:contentId  |  Fetch Movie Content       |
+| GET            | /api/csrf/token          |  Generate CSRF Token       |
+| POST           | /api/profiles            |  Create a new Profile      |
+| GET            | /api/profiles/:userId    |  Get all profiles for user |
+| DELETE         | /api/profiles/:profileId |  Delete Profile            |
+| GET            | /api/tvtrailer/:id       |  Fetch a TV Trailer        |
+| GET            | /api/watchlists/:wlid    |  Get Watchlist Content     |
+| POST           | /api/watchlists/:wlid    |  Add To Watchlist          |
+| DELETE         | /api/watchlists/:wlid    |  Remove From Watchlist     |
+
+
+<br></br>
 
 ## Redux Sample State:
 
